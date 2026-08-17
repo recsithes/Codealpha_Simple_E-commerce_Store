@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - PremiumStore</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">PremiumStore</a>
+            <div class="nav-links" id="nav-auth-links"></div>
+        </nav>
+    </header>
+
+    <main class="container animate-fade-in">
+        <div id="product-detail">
+            <p>Loading product...</p>
+        </div>
+    </main>
+
+    <script src="/js/app.js"></script>
+    <script>
+        async function loadProduct() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+
+            if (!productId) {
+                document.getElementById('product-detail').innerHTML = '<p>Product not found.</p>';
+                return;
+            }
+
+            try {
+                const res = await fetch(`/api/products/${productId}`);
+                if (!res.ok) throw new Error('Product not found');
+                const p = await res.json();
+                
+                const detail = document.getElementById('product-detail');
+                detail.innerHTML = `
+                    <div class="product-detail-container">
+                        <div>
+                            <img src="${p.image_url}" alt="${p.name}" class="detail-img">
+                        </div>
+                        <div style="display:flex; flex-direction:column; justify-content:center;">
+                            <h1>${p.name}</h1>
+                            <p class="product-price" style="font-size:2rem; margin-bottom:1.5rem;">$${p.price.toFixed(2)}</p>
+                            <p style="color:var(--text-muted); line-height:1.8; margin-bottom:2rem; font-size:1.125rem;">${p.description}</p>
+                            <button class="btn btn-primary" style="font-size:1.25rem; padding:1rem 2rem; max-width:250px;" onclick="addToCart(${p.id})">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error loading product:', error);
+                document.getElementById('product-detail').innerHTML = '<p>Error loading product details.</p>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadProduct);
+    </script>
+</body>
+</html>
