@@ -1,62 +1,637 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details - PremiumStore</title>
+    <title>Product Details // AERO Hardware</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="/" class="logo">PremiumStore</a>
-            <div class="nav-links" id="nav-auth-links"></div>
-        </nav>
+    <!-- Global Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="nav-inner">
+                <a href="/" class="brand-logo">
+                    <div class="brand-logo-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                    </div>
+                    <span>AERO</span>
+                    <span class="brand-logo-badge">LOCAL</span>
+                </a>
+
+                <div class="nav-search">
+                    <span class="search-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </span>
+                    <input type="text" id="site-search-input" placeholder="Search acoustic, mechanical, titanium EDC..." autocomplete="off">
+                    <span class="search-kbd">/</span>
+                </div>
+
+                <div class="nav-actions" id="nav-auth-links"></div>
+            </div>
+        </div>
     </header>
 
-    <main class="container animate-fade-in">
-        <div id="product-detail">
-            <p>Loading product...</p>
-        </div>
-    </main>
+    <main class="container">
+        <!-- Breadcrumb -->
+        <nav style="padding:1.5rem 0 1rem; font-size:0.85rem; color:var(--text-muted); display:flex; gap:0.5rem; align-items:center;">
+            <a href="/" style="color:var(--text-secondary); text-decoration:none;">Catalog</a>
+            <span>/</span>
+            <span id="breadcrumb-category">Hardware</span>
+            <span>/</span>
+            <span id="breadcrumb-title" style="color:var(--text-primary); font-weight:600;">Loading...</span>
+        </nav>
 
-    <script src="/js/app.js"></script>
-    <script>
-        async function loadProduct() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const productId = urlParams.get('id');
+        <!-- Product Showcase Layout -->
+        <section class="product-showcase" id="product-showcase-container">
+            <div class="product-showcase-grid">
+                <!-- Gallery Section -->
+                <div class="gallery-container">
+                    <div class="gallery-main-wrap">
+                        <img src="" alt="Hardware Main View" id="detail-main-img" class="gallery-main-img" onerror="this.onerror=null;this.src='/images/placeholder.svg'">
+                    </div>
+                    <div class="gallery-thumbs" id="gallery-thumbs-container"></div>
 
-            if (!productId) {
-                document.getElementById('product-detail').innerHTML = '<p>Product not found.</p>';
-                return;
-            }
-
-            try {
-                const res = await fetch(`/api/products/${productId}`);
-                if (!res.ok) throw new Error('Product not found');
-                const p = await res.json();
-                
-                const detail = document.getElementById('product-detail');
-                detail.innerHTML = `
-                    <div class="product-detail-container">
-                        <div>
-                            <img src="${p.image_url}" alt="${p.name}" class="detail-img">
+                    <!-- Trust Signals -->
+                    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border-subtle); text-align:center;">
+                        <div style="font-size:0.8rem; color:var(--text-secondary);">
+                            <div style="font-size:1.2rem; margin-bottom:0.25rem;">🛡️</div>
+                            <strong>2-Year Warranty</strong>
+                            <div style="font-size:0.75rem; color:var(--text-muted);">Precision coverage</div>
                         </div>
-                        <div style="display:flex; flex-direction:column; justify-content:center;">
-                            <h1>${p.name}</h1>
-                            <p class="product-price" style="font-size:2rem; margin-bottom:1.5rem;">$${p.price.toFixed(2)}</p>
-                            <p style="color:var(--text-muted); line-height:1.8; margin-bottom:2rem; font-size:1.125rem;">${p.description}</p>
-                            <button class="btn btn-primary" style="font-size:1.25rem; padding:1rem 2rem; max-width:250px;" onclick="addToCart(${p.id})">Add to Cart</button>
+                        <div style="font-size:0.8rem; color:var(--text-secondary);">
+                            <div style="font-size:1.2rem; margin-bottom:0.25rem;">⚡</div>
+                            <strong>Local Dispatch</strong>
+                            <div style="font-size:0.75rem; color:var(--text-muted);">Same-day local fulfillment</div>
+                        </div>
+                        <div style="font-size:0.8rem; color:var(--text-secondary);">
+                            <div style="font-size:1.2rem; margin-bottom:0.25rem;">↩️</div>
+                            <strong>30-Day Return</strong>
+                            <div style="font-size:0.75rem; color:var(--text-muted);">Hassle-free guarantee</div>
                         </div>
                     </div>
+                </div>
+
+                <!-- Product Metadata Panel -->
+                <div class="product-meta-panel">
+                    <div class="stock-indicator" id="detail-stock-badge">
+                        <span class="stock-pulse"></span>
+                        <span id="detail-stock-text">Checking stock...</span>
+                    </div>
+
+                    <div style="color:var(--accent); font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.4rem;" id="detail-category">Category</div>
+                    <h1 style="font-size:2.4rem; font-weight:800; letter-spacing:-0.03em; line-height:1.15; margin-bottom:0.6rem;" id="detail-title">Loading Product...</h1>
+                    <p style="color:var(--text-secondary); font-size:1.05rem; margin-bottom:1.25rem; line-height:1.5;" id="detail-tagline"></p>
+
+                    <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:1.5rem; padding-bottom:1.25rem; border-bottom:1px solid var(--border-subtle);">
+                        <span class="star-icon" id="detail-star-icons" style="font-size:1.1rem;">★★★★★</span>
+                        <span style="font-weight:700; font-family:var(--font-mono);" id="detail-rating">4.9</span>
+                        <span style="color:var(--text-muted); font-size:0.85rem;" id="detail-reviews-count">(86 verified reviews)</span>
+                        <a href="#reviews" style="margin-left:auto; font-size:0.85rem; color:var(--accent); text-decoration:none;">Read Reviews ↓</a>
+                    </div>
+
+                    <div style="margin-bottom:1.75rem;">
+                        <div style="display:flex; align-items:baseline; gap:0.75rem;">
+                            <span class="current-price" style="font-size:2.2rem;" id="detail-price">$0.00</span>
+                            <span class="original-price" style="font-size:1.1rem;" id="detail-orig-price"></span>
+                            <span id="detail-discount-tag" class="card-badge sale" style="position:static; display:none;"></span>
+                        </div>
+                        <span style="font-size:0.8rem; color:var(--text-muted); display:block; margin-top:0.25rem;">Taxes calculated at checkout. Free shipping on orders over $100.</span>
+                    </div>
+
+                    <p style="color:var(--text-secondary); line-height:1.7; margin-bottom:1.75rem; font-size:0.95rem;" id="detail-desc"></p>
+
+                    <!-- Technical Specifications Table -->
+                    <div>
+                        <h4 style="font-size:0.95rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); margin-bottom:0.75rem;">Specifications</h4>
+                        <table class="specs-table" id="detail-specs-table">
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <!-- Quantity and Add to Bag CTAs -->
+                    <div style="display:flex; align-items:center; gap:1rem; margin-top:1.5rem; flex-wrap:wrap;">
+                        <div class="qty-stepper" style="height:46px; border-radius:var(--radius-sm);">
+                            <button class="qty-btn" style="width:36px; height:46px;" onclick="adjustDetailQty(-1)">-</button>
+                            <span class="qty-display font-mono" id="detail-qty-input" style="width:36px; font-size:1rem;">1</span>
+                            <button class="qty-btn" style="width:36px; height:46px;" onclick="adjustDetailQty(1)">+</button>
+                        </div>
+                        <button class="btn btn-primary" style="flex:1; height:46px; font-size:1rem;" id="btn-add-detail" onclick="handleDetailAddToCart()">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                            <span>Add to Bag</span>
+                        </button>
+                        <button class="btn btn-secondary" style="height:46px; font-size:1rem;" id="btn-buy-now" onclick="handleBuyNow()">
+                            <span>Instant Buy</span>
+                        </button>
+                        <button class="wishlist-toggle-btn" id="detail-wishlist-btn" style="position:static; width:46px; height:46px; border-radius:var(--radius-sm);" onclick="handleDetailWishlistToggle()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        </button>
+                        <button class="btn btn-secondary" style="height:46px; font-size:0.9rem;" onclick="toggleCompare(currentProduct ? currentProduct.id : 1)" title="Compare specs with other hardware">
+                            ⚖️ Compare Specs
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customer Reviews Section -->
+        <section class="reviews-section" id="reviews">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;">
+                <div>
+                    <h2 style="font-size:1.8rem; font-weight:800; letter-spacing:-0.02em;">Verified Customer Reviews</h2>
+                    <p style="color:var(--text-muted); font-size:0.875rem;">Real feedback stored in your local SQLite database.</p>
+                </div>
+                <button class="btn btn-secondary" onclick="toggleReviewForm()" id="btn-toggle-review-form">+ Write a Review</button>
+            </div>
+
+            <!-- Review Submission Form (Collapsible) -->
+            <div id="review-form-panel" style="display:none; background:var(--bg-surface); border:1px solid var(--border-highlight); border-radius:var(--radius-md); padding:1.75rem; margin-bottom:2rem;">
+                <h3 style="font-size:1.2rem; font-weight:700; margin-bottom:1rem;">Share Your Experience</h3>
+                <form id="write-review-form" onsubmit="handleReviewSubmit(event)">
+                    <div class="form-group">
+                        <label class="form-label">Your Rating</label>
+                        <div style="display:flex; gap:0.5rem; font-size:1.5rem; cursor:pointer;" id="rating-star-selector">
+                            <span data-val="1" class="star-pick" onclick="setPickRating(1)">★</span>
+                            <span data-val="2" class="star-pick" onclick="setPickRating(2)">★</span>
+                            <span data-val="3" class="star-pick" onclick="setPickRating(3)">★</span>
+                            <span data-val="4" class="star-pick" onclick="setPickRating(4)">★</span>
+                            <span data-val="5" class="star-pick" onclick="setPickRating(5)" style="color:var(--accent-amber);">★</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="review-comment">Review Description</label>
+                        <textarea id="review-comment" class="form-textarea" rows="3" placeholder="Tell other hardware enthusiasts about build quality, acoustics, and daily durability..." required></textarea>
+                    </div>
+                    <div style="display:flex; justify-content:flex-end; gap:1rem;">
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="toggleReviewForm()">Cancel</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Submit Review</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Reviews List -->
+            <div class="reviews-list" id="reviews-list-container">
+                <p style="color:var(--text-muted);">Loading reviews...</p>
+            </div>
+        </section>
+
+        <!-- Related Hardware Section -->
+        <section style="padding:3rem 0 5rem; border-top:1px solid var(--border-subtle);">
+            <h2 style="font-size:1.6rem; font-weight:800; margin-bottom:1.5rem;">Recommended In This Category</h2>
+            <div class="product-grid" id="related-products-grid">
+                <!-- Related items -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Slide-over Cart Drawer -->
+    <div class="drawer-overlay" id="cart-drawer-overlay" onclick="closeCartDrawer()"></div>
+    <aside class="drawer-container" id="cart-drawer" aria-label="Shopping bag">
+        <div class="drawer-header">
+            <div class="drawer-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <span>Shopping Bag</span>
+            </div>
+            <button class="drawer-close" onclick="closeCartDrawer()" aria-label="Close bag">✕</button>
+        </div>
+        <div class="drawer-body" id="drawer-cart-list"></div>
+        <div class="drawer-footer" id="drawer-cart-footer">
+            <div class="promo-box">
+                <input type="text" id="drawer-promo-input" class="promo-input" placeholder="Promo code (ALPHA20)" aria-label="Promo code">
+                <button class="btn btn-secondary btn-sm" onclick="applyPromoCode()">Apply</button>
+            </div>
+            <div id="drawer-summary-container"></div>
+            <button class="btn btn-primary btn-block" style="margin-top:1.25rem;" onclick="openCheckoutModal()">
+                <span>Proceed to Checkout</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Wishlist Drawer -->
+    <div class="drawer-overlay" id="wishlist-drawer-overlay" onclick="closeWishlistDrawer()"></div>
+    <aside class="drawer-container" id="wishlist-drawer" aria-label="Wishlist drawer">
+        <div class="drawer-header">
+            <div class="drawer-title">Saved Wishlist</div>
+            <button class="drawer-close" onclick="closeWishlistDrawer()">✕</button>
+        </div>
+        <div class="drawer-body" id="drawer-wishlist-list"></div>
+    </aside>
+
+    <!-- Interactive Checkout Modal -->
+    <div class="modal-overlay" id="checkout-modal-overlay">
+        <div class="modal-content" id="checkout-modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Express Checkout</h3>
+                <button class="drawer-close" onclick="closeCheckoutModal()">✕</button>
+            </div>
+
+            <!-- Steps Progress Bar -->
+            <div class="checkout-steps">
+                <div class="checkout-step active" id="step-marker-1">
+                    <div class="step-circle">1</div>
+                    <span>Shipping</span>
+                </div>
+                <div class="checkout-step" id="step-marker-2">
+                    <div class="step-circle">2</div>
+                    <span>Payment</span>
+                </div>
+                <div class="checkout-step" id="step-marker-3">
+                    <div class="step-circle">3</div>
+                    <span>Confirmation</span>
+                </div>
+            </div>
+
+            <!-- Step 1: Shipping Address -->
+            <div class="checkout-step-panel" id="checkout-step-1">
+                <form id="shipping-form" onsubmit="event.preventDefault(); showCheckoutStep(2);">
+                    <div class="form-group">
+                        <label class="form-label" for="ship-name">Recipient Full Name</label>
+                        <input type="text" id="ship-name" class="form-input" value="Alex Rivera" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="ship-street">Street Address</label>
+                        <input type="text" id="ship-street" class="form-input" value="442 Silicon Crest Way, Suite 8" required>
+                    </div>
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label class="form-label" for="ship-city">City</label>
+                            <input type="text" id="ship-city" class="form-input" value="Austin" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="ship-zip">Postal / Zip Code</label>
+                            <input type="text" id="ship-zip" class="form-input" value="78701" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="ship-state">State / Province</label>
+                        <input type="text" id="ship-state" class="form-input" value="Texas" required>
+                    </div>
+                    <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:1.5rem;">
+                        <button type="button" class="btn btn-secondary" onclick="closeCheckoutModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="btn-step1-continue">Continue to Payment →</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 2: Payment Method -->
+            <div class="checkout-step-panel" id="checkout-step-2" style="display:none;">
+                <form id="payment-form" onsubmit="handlePlaceOrder(event)">
+                    <div style="display:flex; flex-direction:column; gap:0.75rem; margin-bottom:1.5rem;">
+                        <label style="display:flex; align-items:center; gap:0.75rem; padding:0.9rem; background:var(--bg-main); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); cursor:pointer;">
+                            <input type="radio" name="paymentMethod" value="Credit Card" checked>
+                            <span style="font-weight:600;">Instant Card Payment</span>
+                            <span style="font-size:0.8rem; color:var(--accent-emerald); margin-left:auto;">Encrypted SSL</span>
+                        </label>
+                        <label style="display:flex; align-items:center; gap:0.75rem; padding:0.9rem; background:var(--bg-main); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); cursor:pointer;">
+                            <input type="radio" name="paymentMethod" value="Apple Pay / Google Pay">
+                            <span style="font-weight:600;">Apple Pay / Google Pay</span>
+                        </label>
+                        <label style="display:flex; align-items:center; gap:0.75rem; padding:0.9rem; background:var(--bg-main); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); cursor:pointer;">
+                            <input type="radio" name="paymentMethod" value="Cash on Delivery">
+                            <span style="font-weight:600;">Cash on Delivery (Local Pickup)</span>
+                        </label>
+                    </div>
+
+                    <div id="card-inputs">
+                        <div class="form-group">
+                            <label class="form-label" for="card-num">Card Number (Simulated)</label>
+                            <input type="text" id="card-num" class="form-input font-mono" value="4532 •••• •••• 8821" maxlength="19">
+                        </div>
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label class="form-label" for="card-exp">Expiry (MM/YY)</label>
+                                <input type="text" id="card-exp" class="form-input font-mono" value="08/28">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="card-cvv">Security Code</label>
+                                <input type="text" id="card-cvv" class="form-input font-mono" value="924">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:2rem;">
+                        <button type="button" class="btn btn-secondary" onclick="showCheckoutStep(1)">← Back</button>
+                        <button type="submit" class="btn btn-primary" id="btn-submit-order">Place Order Now</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 3: Order Confirmation -->
+            <div class="checkout-step-panel" id="checkout-step-3" style="display:none;">
+                <div class="order-success-box">
+                    <div class="success-check-icon">✓</div>
+                    <h2 style="font-size:1.75rem; font-weight:800; margin-bottom:0.4rem;">Order Confirmed!</h2>
+                    <p style="color:var(--text-secondary); margin-bottom:1.5rem;">Your hardware has been allocated from local SQLite storage.</p>
+
+                    <div style="background:var(--bg-main); border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:1.25rem; margin-bottom:1.75rem; text-align:left;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                            <span style="color:var(--text-muted); font-size:0.85rem;">Order Number</span>
+                            <span class="font-mono" style="font-weight:700;" id="confirm-order-id">#101</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                            <span style="color:var(--text-muted); font-size:0.85rem;">Tracking Code</span>
+                            <span class="font-mono" style="color:var(--accent); font-weight:600;" id="confirm-tracking-code">TRK-49281-LOCAL</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between;">
+                            <span style="color:var(--text-muted); font-size:0.85rem;">Total Charged</span>
+                            <span class="font-mono" style="font-weight:700; color:var(--text-primary);" id="confirm-order-total">$199.99</span>
+                        </div>
+                    </div>
+
+                    <div class="tracking-timeline">
+                        <div class="timeline-point active">
+                            <div class="point-dot">✓</div>
+                            <span class="point-label">Confirmed</span>
+                        </div>
+                        <div class="timeline-point active">
+                            <div class="point-dot">📦</div>
+                            <span class="point-label">Packing</span>
+                        </div>
+                        <div class="timeline-point">
+                            <div class="point-dot">🚚</div>
+                            <span class="point-label">Transit</span>
+                        </div>
+                        <div class="timeline-point">
+                            <div class="point-dot">🏠</div>
+                            <span class="point-label">Delivery</span>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; gap:1rem; justify-content:center; margin-top:2rem;">
+                        <a href="/orders.html" class="btn btn-primary">View in My Orders</a>
+                        <button class="btn btn-secondary" onclick="closeCheckoutModal()">Back to Shop</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Scripts -->
+    <script src="/js/app.js"></script>
+    <script>
+        let currentProduct = null;
+        let selectedQty = 1;
+        let pickedRating = 5;
+
+        async function initProductPage() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id') || 1;
+
+            try {
+                const res = await fetch(`/api/products/${id}`);
+                if (!res.ok) throw new Error('Product not found');
+                currentProduct = await res.json();
+
+                // Fill Page Metadata
+                document.title = `${currentProduct.name} // AERO Hardware`;
+                document.getElementById('breadcrumb-category').textContent = currentProduct.category;
+                document.getElementById('breadcrumb-title').textContent = currentProduct.name;
+                document.getElementById('detail-title').textContent = currentProduct.name;
+                document.getElementById('detail-category').textContent = currentProduct.category;
+                document.getElementById('detail-tagline').textContent = currentProduct.tagline || '';
+                document.getElementById('detail-desc').textContent = currentProduct.description;
+                document.getElementById('detail-price').textContent = `$${currentProduct.price.toFixed(2)}`;
+                document.getElementById('detail-rating').textContent = currentProduct.rating ? currentProduct.rating.toFixed(1) : '5.0';
+                const ratingVal = Math.round(currentProduct.rating || 5);
+                const starIconsEl = document.getElementById('detail-star-icons');
+                if (starIconsEl) {
+                    starIconsEl.textContent = '★'.repeat(ratingVal) + '☆'.repeat(5 - ratingVal);
+                }
+                document.getElementById('detail-reviews-count').textContent = `(${currentProduct.review_count || 12} verified reviews)`;
+
+                // Stock status
+                const stockBadge = document.getElementById('detail-stock-badge');
+                const stockText = document.getElementById('detail-stock-text');
+                if (currentProduct.stock <= 5) {
+                    stockText.textContent = `Only ${currentProduct.stock} units remaining in local inventory`;
+                    stockBadge.style.color = 'var(--accent-rose)';
+                    stockBadge.style.background = 'rgba(244, 63, 94, 0.1)';
+                } else {
+                    stockText.textContent = `In Stock (${currentProduct.stock} units ready for instant dispatch)`;
+                }
+
+                // Pricing discount
+                if (currentProduct.original_price && currentProduct.original_price > currentProduct.price) {
+                    const origEl = document.getElementById('detail-orig-price');
+                    origEl.textContent = `$${currentProduct.original_price.toFixed(2)}`;
+                    const tagEl = document.getElementById('detail-discount-tag');
+                    tagEl.textContent = `-${Math.round((1 - currentProduct.price / currentProduct.original_price) * 100)}%`;
+                    tagEl.style.display = 'inline-block';
+                }
+
+                // Images Gallery
+                const mainImg = document.getElementById('detail-main-img');
+                mainImg.src = currentProduct.image_url;
+
+                const thumbsContainer = document.getElementById('gallery-thumbs-container');
+                const galleryImages = Array.isArray(currentProduct.gallery) && currentProduct.gallery.length > 0 
+                    ? currentProduct.gallery 
+                    : [currentProduct.image_url];
+
+                thumbsContainer.innerHTML = galleryImages.map((img, idx) => `
+                    <img src="${img}" alt="Thumbnail ${idx + 1}" class="gallery-thumb ${idx === 0 ? 'active' : ''}" onclick="switchMainImage('${img}', this)" onerror="this.onerror=null;this.src='/images/placeholder.svg'">
+                `).join('');
+
+                // Specs Table
+                const specsTableBody = document.querySelector('#detail-specs-table tbody');
+                if (currentProduct.specs && Object.keys(currentProduct.specs).length > 0) {
+                    specsTableBody.innerHTML = Object.entries(currentProduct.specs).map(([key, val]) => `
+                        <tr>
+                            <td>${key}</td>
+                            <td>${val}</td>
+                        </tr>
+                    `).join('');
+                } else {
+                    specsTableBody.innerHTML = `
+                        <tr><td>Category</td><td>${currentProduct.category}</td></tr>
+                        <tr><td>Availability</td><td>Immediate Local Fulfillment</td></tr>
+                        <tr><td>Quality Check</td><td>Factory Tested & Calibrated</td></tr>
+                    `;
+                }
+
+                // Update Wishlist button
+                const wlBtn = document.getElementById('detail-wishlist-btn');
+                if (wlBtn) {
+                    wlBtn.dataset.productId = currentProduct.id;
+                    if (wishlistProductIds.has(currentProduct.id)) {
+                        wlBtn.classList.add('active');
+                        const svg = wlBtn.querySelector('svg');
+                        if (svg) svg.setAttribute('fill', 'currentColor');
+                    }
+                }
+
+                // Load Reviews
+                loadProductReviews(currentProduct.id);
+
+                // Load Related Products
+                loadRelatedProducts(currentProduct.category, currentProduct.id);
+
+            } catch (err) {
+                console.error(err);
+                document.getElementById('product-showcase-container').innerHTML = `
+                    <div style="text-align:center; padding:4rem 1rem;">
+                        <h2>Product Not Found</h2>
+                        <p style="color:var(--text-muted); margin:1rem 0 2rem;">The requested hardware item could not be retrieved from the local database.</p>
+                        <a href="/" class="btn btn-primary">Return to Catalog</a>
+                    </div>
                 `;
-            } catch (error) {
-                console.error('Error loading product:', error);
-                document.getElementById('product-detail').innerHTML = '<p>Error loading product details.</p>';
             }
         }
 
-        document.addEventListener('DOMContentLoaded', loadProduct);
+        function switchMainImage(url, thumbElement) {
+            document.getElementById('detail-main-img').src = url;
+            document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+            if (thumbElement) thumbElement.classList.add('active');
+        }
+
+        function adjustDetailQty(delta) {
+            selectedQty = Math.max(1, selectedQty + delta);
+            if (currentProduct && currentProduct.stock && selectedQty > currentProduct.stock) {
+                selectedQty = currentProduct.stock;
+                showToast(`Maximum ${currentProduct.stock} in stock`, 'error');
+            }
+            document.getElementById('detail-qty-input').textContent = selectedQty;
+        }
+
+        function handleDetailAddToCart() {
+            if (!currentProduct) return;
+            addToCart(currentProduct.id, selectedQty);
+        }
+
+        function handleBuyNow() {
+            if (!currentProduct) return;
+            const token = getAuthToken();
+            if (!token) {
+                showToast('Please sign in to proceed with instant checkout', 'error');
+                setTimeout(() => window.location.href = '/login.html', 800);
+                return;
+            }
+            addToCart(currentProduct.id, selectedQty);
+            setTimeout(() => openCheckoutModal(), 300);
+        }
+
+        function handleDetailWishlistToggle() {
+            if (!currentProduct) return;
+            const btn = document.getElementById('detail-wishlist-btn');
+            toggleWishlist(currentProduct.id, btn);
+        }
+
+        // Reviews Controller
+        async function loadProductReviews(productId) {
+            const container = document.getElementById('reviews-list-container');
+            try {
+                const res = await fetch(`/api/products/${productId}/reviews`);
+                const reviews = await res.json();
+
+                if (reviews.length === 0) {
+                    container.innerHTML = `
+                        <div style="text-align:center; padding:2rem; background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--radius-md);">
+                            <p style="color:var(--text-secondary);">No reviews written yet. Be the first to share your evaluation!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = reviews.map(r => `
+                    <div class="review-card">
+                        <div class="review-header">
+                            <span class="reviewer-name">${r.author_name}</span>
+                            <span class="review-date">${new Date(r.created_at).toLocaleDateString()}</span>
+                        </div>
+                        <div style="color:var(--accent-amber); margin-bottom:0.4rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</div>
+                        <p style="color:var(--text-secondary); font-size:0.9rem; line-height:1.5;">${r.comment}</p>
+                    </div>
+                `).join('');
+            } catch (e) {
+                container.innerHTML = '<p style="color:var(--accent-rose);">Error loading reviews.</p>';
+            }
+        }
+
+        function toggleReviewForm() {
+            const token = getAuthToken();
+            if (!token) {
+                showToast('Please log in to submit a review', 'error');
+                setTimeout(() => window.location.href = '/login.html', 800);
+                return;
+            }
+            const panel = document.getElementById('review-form-panel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function setPickRating(val) {
+            pickedRating = val;
+            const stars = document.querySelectorAll('#rating-star-selector .star-pick');
+            stars.forEach((s, idx) => {
+                s.style.color = (idx < val) ? 'var(--accent-amber)' : 'var(--text-muted)';
+            });
+        }
+
+        async function handleReviewSubmit(e) {
+            e.preventDefault();
+            const token = getAuthToken();
+            if (!token) return;
+
+            const comment = document.getElementById('review-comment').value;
+            try {
+                const res = await fetch(`/api/products/${currentProduct.id}/reviews`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ rating: pickedRating, comment })
+                });
+
+                if (res.ok) {
+                    showToast('Review submitted successfully!');
+                    document.getElementById('review-comment').value = '';
+                    toggleReviewForm();
+                    loadProductReviews(currentProduct.id);
+                } else {
+                    const err = await res.json();
+                    showToast(err.error || 'Failed to submit review', 'error');
+                }
+            } catch (e) {
+                showToast('Error submitting review', 'error');
+            }
+        }
+
+        async function loadRelatedProducts(category, currentId) {
+            const grid = document.getElementById('related-products-grid');
+            try {
+                const res = await fetch(`/api/products?category=${encodeURIComponent(category)}`);
+                const items = await res.json();
+                const filtered = items.filter(i => i.id !== currentId).slice(0, 3);
+
+                if (filtered.length === 0) {
+                    grid.parentElement.style.display = 'none';
+                    return;
+                }
+
+                grid.innerHTML = filtered.map(p => `
+                    <div class="product-card">
+                        <div class="card-img-wrap" style="height:200px;">
+                            <a href="/product.html?id=${p.id}">
+                                <img src="${p.image_url}" alt="${p.name}" class="card-img" onerror="this.onerror=null;this.src='/images/placeholder.svg'">
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-category">${p.category}</div>
+                            <h3 class="card-title" style="font-size:1rem;"><a href="/product.html?id=${p.id}" style="color:inherit; text-decoration:none;">${p.name}</a></h3>
+                            <div class="card-footer" style="padding-top:0.75rem;">
+                                <span class="current-price">$${p.price.toFixed(2)}</span>
+                                <button class="btn-card-add" onclick="addToCart(${p.id})">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initProductPage);
     </script>
 </body>
 </html>

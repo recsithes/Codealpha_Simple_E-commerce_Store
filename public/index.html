@@ -1,63 +1,578 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Store - Home</title>
+    <title>AERO // Precision Hardware & Everyday Carry</title>
+    <meta name="description" content="Curated high-performance acoustics, mechanical keyboards, desk setups, and aerospace titanium EDC running 100% locally.">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="/" class="logo">PremiumStore</a>
-            <div class="nav-links" id="nav-auth-links">
-                <!-- Populated by app.js -->
+    <!-- Global Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="nav-inner">
+                <a href="/" class="brand-logo" id="site-logo">
+                    <div class="brand-logo-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                    </div>
+                    <span>AERO</span>
+                    <span class="brand-logo-badge">LOCAL</span>
+                </a>
+
+                <div class="nav-search">
+                    <span class="search-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </span>
+                    <input type="text" id="site-search-input" placeholder="Search acoustic, mechanical, titanium EDC..." autocomplete="off">
+                    <span class="search-kbd">/</span>
+                </div>
+
+                <div class="nav-actions" id="nav-auth-links">
+                    <!-- Dynamic Auth & Navigation links loaded by app.js -->
+                </div>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <main class="container animate-fade-in">
-        <h1>Featured Products</h1>
-        <div class="product-grid" id="product-grid">
-            <!-- Products loaded via JS -->
-            <p>Loading products...</p>
-        </div>
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-copy">
+                        <div class="hero-tag">
+                            <span class="hero-tag-dot"></span>
+                            <span>Edition 2026 // Local First</span>
+                        </div>
+                        <h1 class="hero-title">Tools Built for Daily Mastery.</h1>
+                        <p class="hero-subtitle">Aerospace-grade acoustics, bespoke tactile switches, and calibrated creative displays. Zero cloud bloat, pure local performance.</p>
+                        
+                        <div class="hero-cta-group">
+                            <a href="#catalog" class="btn btn-primary" id="hero-cta-shop">
+                                <span>Explore Catalog</span>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                            <button class="btn btn-secondary" onclick="openAddProductModal()" id="hero-btn-add">
+                                <span>+ Add Custom Item</span>
+                            </button>
+                        </div>
+
+                        <div class="hero-metrics">
+                            <div class="metric-item">
+                                <span class="metric-value">0.4ms</span>
+                                <span class="metric-label">Local SQLite Sync</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">100%</span>
+                                <span class="metric-label">Offline Capable</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-value">4.92 ★</span>
+                                <span class="metric-label">Verified Rating</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Spotlight Card -->
+                    <div class="hero-spotlight" id="hero-spotlight-card">
+                        <div class="spotlight-img-wrap">
+                            <span class="spotlight-badge">Featured Flagship</span>
+                            <img src="/images/products/headphones.svg" alt="AeroSonics Pro ANC Headphones" class="spotlight-img" id="spotlight-image" onerror="this.onerror=null;this.src='/images/placeholder.svg'">
+                        </div>
+                        <div class="spotlight-body">
+                            <div class="spotlight-category">Audio & Acoustics</div>
+                            <h3 class="spotlight-name" id="spotlight-title">AeroSonics Pro ANC Headphones</h3>
+                            <p style="color:var(--text-secondary); font-size:0.875rem; margin-bottom:1rem;">40mm bio-cellulose drivers with 45-hour ultra-plush noise-canceling endurance.</p>
+                            <div class="spotlight-footer">
+                                <div>
+                                    <span style="font-size:0.75rem; color:var(--text-muted); display:block;">Special Local Offer</span>
+                                    <span class="current-price" style="font-size:1.4rem;">$199.99</span>
+                                    <span class="original-price" style="margin-left:0.4rem;">$249.99</span>
+                                </div>
+                                <button class="btn btn-primary btn-sm" onclick="addToCart(1)" id="spotlight-add-btn">
+                                    <span>Add to Bag</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Filter & Sort Bar -->
+        <section class="filter-bar-section" id="catalog">
+            <div class="container">
+                <div class="filter-bar-inner">
+                    <div class="category-pills" id="category-pills-container">
+                        <button class="category-pill active" data-category="all">All Hardware</button>
+                        <button class="category-pill" data-category="Audio">Audio</button>
+                        <button class="category-pill" data-category="Wearables">Wearables</button>
+                        <button class="category-pill" data-category="Mechanical">Mechanical</button>
+                        <button class="category-pill" data-category="Desk Setup">Desk Setup</button>
+                        <button class="category-pill" data-category="Cameras & EDC">Cameras & EDC</button>
+                    </div>
+
+                    <div class="filter-controls">
+                        <select class="sort-select" id="sort-selector" aria-label="Sort products">
+                            <option value="featured">Featured First</option>
+                            <option value="price_asc">Price: Low to High</option>
+                            <option value="price_desc">Price: High to Low</option>
+                            <option value="rating">Highest Rated</option>
+                            <option value="newest">Newest Releases</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Grid Section -->
+        <section class="products-section">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Hardware Collection</h2>
+                        <span class="section-count" id="product-count-display">Showing 8 premium items</span>
+                    </div>
+                </div>
+
+                <div class="product-grid" id="product-grid">
+                    <!-- Skeleton Cards for smooth loading -->
+                    <div class="product-card skeleton" style="height:420px;"></div>
+                    <div class="product-card skeleton" style="height:420px;"></div>
+                    <div class="product-card skeleton" style="height:420px;"></div>
+                    <div class="product-card skeleton" style="height:420px;"></div>
+                </div>
+            </div>
+        </section>
     </main>
 
+    <!-- Slide-over Cart Drawer -->
+    <div class="drawer-overlay" id="cart-drawer-overlay" onclick="closeCartDrawer()"></div>
+    <aside class="drawer-container" id="cart-drawer" aria-label="Shopping bag">
+        <div class="drawer-header">
+            <div class="drawer-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <span>Shopping Bag</span>
+            </div>
+            <button class="drawer-close" onclick="closeCartDrawer()" aria-label="Close bag">✕</button>
+        </div>
+
+        <div class="drawer-body" id="drawer-cart-list">
+            <!-- Items loaded dynamically -->
+        </div>
+
+        <div class="drawer-footer" id="drawer-cart-footer">
+            <div class="promo-box">
+                <input type="text" id="drawer-promo-input" class="promo-input" placeholder="Promo code (ALPHA20)" aria-label="Promo code">
+                <button class="btn btn-secondary btn-sm" onclick="applyPromoCode()">Apply</button>
+            </div>
+
+            <div id="drawer-summary-container">
+                <!-- Calculated totals -->
+            </div>
+
+            <button class="btn btn-primary btn-block" style="margin-top:1.25rem;" onclick="openCheckoutModal()" id="btn-drawer-checkout">
+                <span>Proceed to Checkout</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+            <a href="/cart.html" style="display:block; text-align:center; margin-top:0.75rem; font-size:0.85rem; color:var(--text-secondary); text-decoration:none;">View Full Bag Page →</a>
+        </div>
+    </aside>
+
+    <!-- Slide-over Wishlist Drawer -->
+    <div class="drawer-overlay" id="wishlist-drawer-overlay" onclick="closeWishlistDrawer()"></div>
+    <aside class="drawer-container" id="wishlist-drawer" aria-label="Wishlist drawer">
+        <div class="drawer-header">
+            <div class="drawer-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <span>Saved Wishlist</span>
+            </div>
+            <button class="drawer-close" onclick="closeWishlistDrawer()" aria-label="Close wishlist">✕</button>
+        </div>
+        <div class="drawer-body" id="drawer-wishlist-list">
+            <!-- Wishlist items -->
+        </div>
+    </aside>
+
+    <!-- Interactive Checkout Modal -->
+    <div class="modal-overlay" id="checkout-modal-overlay">
+        <div class="modal-content" id="checkout-modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Express Checkout</h3>
+                <button class="drawer-close" onclick="closeCheckoutModal()">✕</button>
+            </div>
+
+            <!-- Steps Progress Bar -->
+            <div class="checkout-steps">
+                <div class="checkout-step active" id="step-marker-1">
+                    <div class="step-circle">1</div>
+                    <span>Shipping</span>
+                </div>
+                <div class="checkout-step" id="step-marker-2">
+                    <div class="step-circle">2</div>
+                    <span>Payment</span>
+                </div>
+                <div class="checkout-step" id="step-marker-3">
+                    <div class="step-circle">3</div>
+                    <span>Confirmation</span>
+                </div>
+            </div>
+
+            <!-- Step 1: Shipping Address -->
+            <div class="checkout-step-panel" id="checkout-step-1">
+                <form id="shipping-form" onsubmit="event.preventDefault(); showCheckoutStep(2);">
+                    <div class="form-group">
+                        <label class="form-label" for="ship-name">Recipient Full Name</label>
+                        <input type="text" id="ship-name" class="form-input" value="Alex Rivera" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="ship-street">Street Address</label>
+                        <input type="text" id="ship-street" class="form-input" value="442 Silicon Crest Way, Suite 8" required>
+                    </div>
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label class="form-label" for="ship-city">City</label>
+                            <input type="text" id="ship-city" class="form-input" value="Austin" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="ship-zip">Postal / Zip Code</label>
+                            <input type="text" id="ship-zip" class="form-input" value="78701" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="ship-state">State / Province</label>
+                        <input type="text" id="ship-state" class="form-input" value="Texas" required>
+                    </div>
+                    <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:1.5rem;">
+                        <button type="button" class="btn btn-secondary" onclick="closeCheckoutModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="btn-step1-continue">Continue to Payment →</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 2: Payment Method -->
+            <div class="checkout-step-panel" id="checkout-step-2" style="display:none;">
+                <form id="payment-form" onsubmit="handlePlaceOrder(event)">
+                    <div style="display:flex; flex-direction:column; gap:0.75rem; margin-bottom:1.5rem;">
+                        <label style="display:flex; align-items:center; gap:0.75rem; padding:0.9rem; background:var(--bg-main); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); cursor:pointer;">
+                            <input type="radio" name="paymentMethod" value="Credit Card" checked>
+                            <span style="font-weight:600;">Instant Card Payment</span>
+                            <span style="font-size:0.8rem; color:var(--accent-emerald); margin-left:auto;">Encrypted SSL</span>
+                        </label>
+                        <label style="display:flex; align-items:center; gap:0.75rem; padding:0.9rem; background:var(--bg-main); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); cursor:pointer;">
+                            <input type="radio" name="paymentMethod" value="Apple Pay / Google Pay">
+                            <span style="font-weight:600;">Apple Pay / Google Pay</span>
+                        </label>
+                        <label style="display:flex; align-items:center; gap:0.75rem; padding:0.9rem; background:var(--bg-main); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); cursor:pointer;">
+                            <input type="radio" name="paymentMethod" value="Cash on Delivery">
+                            <span style="font-weight:600;">Cash on Delivery (Local Pickup)</span>
+                        </label>
+                    </div>
+
+                    <div id="card-inputs">
+                        <div class="form-group">
+                            <label class="form-label" for="card-num">Card Number (Simulated)</label>
+                            <input type="text" id="card-num" class="form-input font-mono" value="4532 •••• •••• 8821" maxlength="19">
+                        </div>
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label class="form-label" for="card-exp">Expiry (MM/YY)</label>
+                                <input type="text" id="card-exp" class="form-input font-mono" value="08/28">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="card-cvv">Security Code</label>
+                                <input type="text" id="card-cvv" class="form-input font-mono" value="924">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:2rem;">
+                        <button type="button" class="btn btn-secondary" onclick="showCheckoutStep(1)">← Back</button>
+                        <button type="submit" class="btn btn-primary" id="btn-submit-order">Place Order Now</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 3: Order Confirmation -->
+            <div class="checkout-step-panel" id="checkout-step-3" style="display:none;">
+                <div class="order-success-box">
+                    <div class="success-check-icon">✓</div>
+                    <h2 style="font-size:1.75rem; font-weight:800; margin-bottom:0.4rem;">Order Confirmed!</h2>
+                    <p style="color:var(--text-secondary); margin-bottom:1.5rem;">Your hardware has been allocated from local SQLite storage.</p>
+
+                    <div style="background:var(--bg-main); border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:1.25rem; margin-bottom:1.75rem; text-align:left;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                            <span style="color:var(--text-muted); font-size:0.85rem;">Order Number</span>
+                            <span class="font-mono" style="font-weight:700;" id="confirm-order-id">#101</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                            <span style="color:var(--text-muted); font-size:0.85rem;">Tracking Code</span>
+                            <span class="font-mono" style="color:var(--accent); font-weight:600;" id="confirm-tracking-code">TRK-49281-LOCAL</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between;">
+                            <span style="color:var(--text-muted); font-size:0.85rem;">Total Charged</span>
+                            <span class="font-mono" style="font-weight:700; color:var(--text-primary);" id="confirm-order-total">$199.99</span>
+                        </div>
+                    </div>
+
+                    <div class="tracking-timeline">
+                        <div class="timeline-point active">
+                            <div class="point-dot">✓</div>
+                            <span class="point-label">Confirmed</span>
+                        </div>
+                        <div class="timeline-point active">
+                            <div class="point-dot">📦</div>
+                            <span class="point-label">Packing</span>
+                        </div>
+                        <div class="timeline-point">
+                            <div class="point-dot">🚚</div>
+                            <span class="point-label">Transit</span>
+                        </div>
+                        <div class="timeline-point">
+                            <div class="point-dot">🏠</div>
+                            <span class="point-label">Delivery</span>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; gap:1rem; justify-content:center; margin-top:2rem;">
+                        <a href="/orders.html" class="btn btn-primary">View in My Orders</a>
+                        <button class="btn btn-secondary" onclick="closeCheckoutModal()">Back to Shop</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin: Add Product Modal -->
+    <div class="modal-overlay" id="add-product-modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Custom Hardware Item</h3>
+                <button class="drawer-close" onclick="closeAddProductModal()">✕</button>
+            </div>
+            <form id="add-product-form" onsubmit="handleCreateProduct(event)">
+                <div class="form-group">
+                    <label class="form-label" for="new-prod-name">Product Name</label>
+                    <input type="text" id="new-prod-name" class="form-input" placeholder="e.g. Cobalt Hi-Fi DAC Amp" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="new-prod-tagline">Short Tagline</label>
+                    <input type="text" id="new-prod-tagline" class="form-input" placeholder="e.g. 32-bit/768kHz high resolution audio decoder">
+                </div>
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label class="form-label" for="new-prod-category">Category</label>
+                        <select id="new-prod-category" class="form-select">
+                            <option value="Audio">Audio</option>
+                            <option value="Wearables">Wearables</option>
+                            <option value="Mechanical">Mechanical</option>
+                            <option value="Desk Setup">Desk Setup</option>
+                            <option value="Cameras & EDC">Cameras & EDC</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="new-prod-badge">Badge Label</label>
+                        <input type="text" id="new-prod-badge" class="form-input" value="New Release">
+                    </div>
+                </div>
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label class="form-label" for="new-prod-price">Retail Price ($)</label>
+                        <input type="number" step="0.01" id="new-prod-price" class="form-input" placeholder="149.00" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="new-prod-orig-price">Original Price ($)</label>
+                        <input type="number" step="0.01" id="new-prod-orig-price" class="form-input" placeholder="189.00">
+                    </div>
+                </div>
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label class="form-label" for="new-prod-stock">Initial Stock</label>
+                        <input type="number" id="new-prod-stock" class="form-input" value="15" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="new-prod-image">Image URL</label>
+                        <input type="text" id="new-prod-image" class="form-input" value="/images/products/headphones.svg">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="new-prod-desc">Detailed Description</label>
+                    <textarea id="new-prod-desc" class="form-textarea" rows="3" placeholder="Crafted with CNC milled aluminum..."></textarea>
+                </div>
+                <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:1.5rem;">
+                    <button type="button" class="btn btn-secondary" onclick="closeAddProductModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save to SQLite</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Minimal Modern Footer -->
+    <footer style="border-top:1px solid var(--border-subtle); padding:3.5rem 0 2.5rem; background:var(--bg-main);">
+        <div class="container">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem;">
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                    <div class="brand-logo-icon" style="width:28px; height:28px;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon></svg>
+                    </div>
+                    <span style="font-weight:700; font-size:1.1rem;">AERO STORE</span>
+                    <span style="color:var(--text-muted); font-size:0.85rem;">// Local-First E-Commerce</span>
+                </div>
+                <div style="display:flex; gap:1.5rem; font-size:0.875rem; color:var(--text-secondary); flex-wrap:wrap;">
+                    <a href="/" style="color:inherit; text-decoration:none;">Catalog</a>
+                    <a href="/wishlist.html" style="color:inherit; text-decoration:none;">Wishlist</a>
+                    <a href="/compare.html" style="color:inherit; text-decoration:none;">Compare</a>
+                    <a href="/cart.html" style="color:inherit; text-decoration:none;">Cart</a>
+                    <a href="/orders.html" style="color:inherit; text-decoration:none;">Orders</a>
+                    <a href="/profile.html" style="color:inherit; text-decoration:none;">Profile</a>
+                    <a href="/admin.html" style="color:inherit; text-decoration:none;">Admin</a>
+                    <a href="/contact.html" style="color:inherit; text-decoration:none;">Support & Track</a>
+                    <a href="/about.html" style="color:inherit; text-decoration:none;">About</a>
+                    <span style="color:var(--accent-emerald);">● SQLite Local Active</span>
+                </div>
+            </div>
+            <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--border-subtle); display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted); flex-wrap:wrap; gap:0.5rem;">
+                <span>© 2026 AERO Hardware Inc. All rights reserved.</span>
+                <span>Self-contained local Express + SQLite architecture.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- App Scripts -->
     <script src="/js/app.js"></script>
     <script>
+        let currentCategory = 'all';
+        let currentSort = 'featured';
+        let currentSearch = '';
+
         async function loadProducts() {
+            const grid = document.getElementById('product-grid');
+            if (!grid) return;
+
+            let url = `/api/products?sort=${currentSort}`;
+            if (currentCategory !== 'all') {
+                url += `&category=${encodeURIComponent(currentCategory)}`;
+            }
+            if (currentSearch.trim()) {
+                url += `&search=${encodeURIComponent(currentSearch.trim())}`;
+            }
+
             try {
-                const res = await fetch('/api/products');
+                const res = await fetch(url);
+                if (!res.ok) throw new Error('Could not fetch products');
                 const products = await res.json();
-                
-                const grid = document.getElementById('product-grid');
-                grid.innerHTML = '';
-                
-                products.forEach(p => {
-                    const card = document.createElement('div');
-                    card.className = 'product-card';
-                    card.innerHTML = `
-                        <a href="/product.html?id=${p.id}" style="text-decoration:none; color:inherit; display:flex; flex-direction:column; height:100%;">
-                            <img src="${p.image_url}" alt="${p.name}" class="product-img">
-                            <div class="product-info">
-                                <h3 class="product-name">${p.name}</h3>
-                                <p class="product-desc">${p.description.substring(0, 60)}...</p>
-                                <div class="product-footer">
-                                    <span class="product-price">$${p.price.toFixed(2)}</span>
-                                    <button class="btn btn-primary" onclick="event.preventDefault(); addToCart(${p.id})">Add to Cart</button>
+
+                const countEl = document.getElementById('product-count-display');
+                if (countEl) countEl.textContent = `Showing ${products.length} precision hardware ${products.length === 1 ? 'item' : 'items'}`;
+
+                if (products.length === 0) {
+                    grid.innerHTML = `
+                        <div style="grid-column:1/-1; text-align:center; padding:4rem 1rem; background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--radius-md);">
+                            <div style="font-size:2.5rem; margin-bottom:1rem; opacity:0.6;">🔍</div>
+                            <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:0.5rem;">No products match your criteria</h3>
+                            <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:1.5rem;">Try resetting your search or exploring a different category.</p>
+                            <button class="btn btn-secondary btn-sm" onclick="resetFilters()">Reset All Filters</button>
+                        </div>
+                    `;
+                    return;
+                }
+
+                grid.innerHTML = products.map(p => {
+                    const discountBadge = p.original_price && p.original_price > p.price
+                        ? `<span class="card-badge sale">-${Math.round((1 - p.price / p.original_price) * 100)}%</span>`
+                        : (p.badge ? `<span class="card-badge">${p.badge}</span>` : '');
+
+                    const inWishlist = wishlistProductIds.has(p.id) ? 'active' : '';
+
+                    return `
+                        <div class="product-card" id="product-${p.id}">
+                            <div class="card-img-wrap">
+                                ${discountBadge}
+                                <button class="wishlist-toggle-btn ${inWishlist}" data-product-id="${p.id}" onclick="toggleWishlist(${p.id}, this)" title="Save to Wishlist" aria-label="Save to Wishlist">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="${inWishlist ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                </button>
+                                <a href="/product.html?id=${p.id}">
+                                    <img src="${p.image_url}" alt="${p.name}" class="card-img" loading="lazy" onerror="this.onerror=null;this.src='/images/placeholder.svg'">
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-category">${p.category}</div>
+                                <a href="/product.html?id=${p.id}" style="text-decoration:none; color:inherit;">
+                                    <h3 class="card-title">${p.name}</h3>
+                                </a>
+                                <p class="card-tagline">${p.tagline || p.description}</p>
+                                <div class="card-rating">
+                                    <span class="star-icon">★</span>
+                                    <span style="font-weight:700; color:var(--text-primary); font-family:var(--font-mono);">${p.rating ? p.rating.toFixed(1) : '4.8'}</span>
+                                    <span>(${p.review_count || 12} verified)</span>
+                                    <span style="margin-left:auto; color:${p.stock <= 5 ? 'var(--accent-rose)' : 'var(--accent-emerald)'}; font-size:0.75rem; font-weight:600;">
+                                        ${p.stock <= 5 ? `Only ${p.stock} left` : 'In Stock'}
+                                    </span>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="price-wrap">
+                                        <span class="current-price">$${p.price.toFixed(2)}</span>
+                                        ${p.original_price ? `<span class="original-price">$${p.original_price.toFixed(2)}</span>` : ''}
+                                    </div>
+                                    <div style="display:flex; gap:0.4rem; align-items:center;">
+                                        <button class="btn btn-secondary btn-sm" onclick="toggleCompare(${p.id})" title="Compare Specs">Compare</button>
+                                        <button class="btn-card-add" onclick="addToCart(${p.id})" id="add-to-cart-btn-${p.id}" title="Quick add to bag">
+                                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                            <span>Add</span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     `;
-                    grid.appendChild(card);
-                });
+                }).join('');
             } catch (error) {
                 console.error('Error loading products:', error);
-                document.getElementById('product-grid').innerHTML = '<p>Error loading products. Please try again later.</p>';
+                grid.innerHTML = '<p style="color:var(--accent-rose); text-align:center; grid-column:1/-1;">Error loading products. Check local server.</p>';
             }
         }
 
+        function resetFilters() {
+            currentCategory = 'all';
+            currentSearch = '';
+            currentSort = 'featured';
+            document.querySelectorAll('.category-pill').forEach(p => p.classList.toggle('active', p.dataset.category === 'all'));
+            const searchInput = document.getElementById('site-search-input');
+            if (searchInput) searchInput.value = '';
+            const sortSelect = document.getElementById('sort-selector');
+            if (sortSelect) sortSelect.value = 'featured';
+            loadProducts();
+        }
+
+        // Search Input Debouncing
+        let searchTimeout = null;
+        document.getElementById('site-search-input')?.addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                currentSearch = e.target.value;
+                loadProducts();
+            }, 250);
+        });
+
+        // Category Pills Listener
+        document.getElementById('category-pills-container')?.addEventListener('click', (e) => {
+            const pill = e.target.closest('.category-pill');
+            if (!pill) return;
+            document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            currentCategory = pill.dataset.category;
+            loadProducts();
+        });
+
+        // Sort Selector Listener
+        document.getElementById('sort-selector')?.addEventListener('change', (e) => {
+            currentSort = e.target.value;
+            loadProducts();
+        });
+
+        window.loadProducts = loadProducts;
         document.addEventListener('DOMContentLoaded', loadProducts);
     </script>
 </body>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="monBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f1420"/>
+      <stop offset="100%" stop-color="#080a10"/>
+    </linearGradient>
+    <linearGradient id="monScreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="35%" stop-color="#312e81"/>
+      <stop offset="70%" stop-color="#0e7490"/>
+      <stop offset="100%" stop-color="#064e3b"/>
+    </linearGradient>
+    <linearGradient id="monStand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#475569"/>
+      <stop offset="50%" stop-color="#94a3b8"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#monBg)"/>
+
+  <!-- Screen Glow on Desk -->
+  <ellipse cx="300" cy="380" rx="180" ry="25" fill="#38bdf8" opacity="0.1" filter="blur(15px)"/>
+
+  <!-- Ergonomic Stand Stem -->
+  <path d="M285 270 L315 270 L312 365 L288 365 Z" fill="url(#monStand)" stroke="#1e293b" stroke-width="1.5"/>
+  <!-- Stand Base Heavy Foot -->
+  <polygon points="210,380 390,380 375,365 225,365" fill="url(#monStand)" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Monitor Bezel Outer Frame (Ultra-thin Micro-Edge) -->
+  <rect x="70" y="55" width="460" height="260" rx="10" fill="#0f172a" stroke="#334155" stroke-width="2.5"/>
+
+  <!-- IPS 4K HDR Nano Panel -->
+  <rect x="76" y="61" width="448" height="242" rx="6" fill="url(#monScreen)"/>
+
+  <!-- Screen Content: Wallpaper Graphics & Studio Grid -->
+  <circle cx="300" cy="180" r="65" fill="#f43f5e" opacity="0.8"/>
+  <path d="M120 280 Q220 180 320 240 T510 200 L524 303 L76 303 Z" fill="#0284c7" opacity="0.75"/>
+  <path d="M180 290 Q270 210 370 260 T524 230 L524 303 L180 303 Z" fill="#10b981" opacity="0.6"/>
+
+  <!-- Modern Code / UI overlay window on screen -->
+  <rect x="110" y="85" width="160" height="85" rx="5" fill="#0f172a" opacity="0.85" stroke="#334155" stroke-width="1"/>
+  <circle cx="122" cy="95" r="3" fill="#ef4444"/>
+  <circle cx="132" cy="95" r="3" fill="#eab308"/>
+  <circle cx="142" cy="95" r="3" fill="#22c55e"/>
+  <line x1="120" y1="112" x2="210" y2="112" stroke="#60a5fa" stroke-width="2"/>
+  <line x1="120" y1="124" x2="240" y2="124" stroke="#a78bfa" stroke-width="2"/>
+  <line x1="120" y1="136" x2="180" y2="136" stroke="#34d399" stroke-width="2"/>
+  <line x1="120" y1="148" x2="225" y2="148" stroke="#94a3b8" stroke-width="2"/>
+
+  <!-- Bottom Chin with Subtle Logo -->
+  <rect x="70" y="303" width="460" height="14" rx="0 0 8 8" fill="#1e293b"/>
+  <circle cx="300" cy="310" r="2.5" fill="#38bdf8"/>
+
+  <!-- Spec Tag -->
+  <rect x="225" y="405" width="150" height="26" rx="13" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="300" y="422" text-anchor="middle" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" letter-spacing="1">4K UHD NANO-IPS</text>
+</svg>

@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="kbBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10141e"/>
+      <stop offset="100%" stop-color="#080a10"/>
+    </linearGradient>
+    <linearGradient id="kbCase" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="kbRgb" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="kbCapDark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="kbCapAccent" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#4338ca"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#kbBg)"/>
+  <!-- Underglow reflection -->
+  <rect x="70" y="110" width="460" height="230" rx="24" fill="url(#kbRgb)" opacity="0.15" filter="blur(18px)"/>
+
+  <!-- Anodized Aluminum CNC Chassis -->
+  <rect x="75" y="115" width="450" height="220" rx="16" fill="url(#kbCase)" stroke="#475569" stroke-width="2"/>
+
+  <!-- Rotary Encoder Brass / Silver Knob top right -->
+  <circle cx="490" cy="148" r="14" fill="#d97706" stroke="#fbbf24" stroke-width="2"/>
+  <circle cx="490" cy="148" r="10" fill="#92400e"/>
+  <line x1="490" y1="138" x2="490" y2="144" stroke="#fde68a" stroke-width="2"/>
+
+  <!-- Keycaps Layout Matrix (75% Compact) -->
+  <!-- Function Row -->
+  <g fill="url(#kbCapAccent)" stroke="#1e293b" stroke-width="1.5">
+    <rect x="95" y="135" width="26" height="22" rx="4"/>
+    <rect x="127" y="135" width="24" height="22" rx="4"/>
+    <rect x="155" y="135" width="24" height="22" rx="4"/>
+    <rect x="183" y="135" width="24" height="22" rx="4"/>
+    <rect x="211" y="135" width="24" height="22" rx="4"/>
+    <rect x="245" y="135" width="24" height="22" rx="4"/>
+    <rect x="273" y="135" width="24" height="22" rx="4"/>
+    <rect x="301" y="135" width="24" height="22" rx="4"/>
+    <rect x="329" y="135" width="24" height="22" rx="4"/>
+    <rect x="363" y="135" width="24" height="22" rx="4"/>
+    <rect x="391" y="135" width="24" height="22" rx="4"/>
+    <rect x="419" y="135" width="24" height="22" rx="4"/>
+    <rect x="447" y="135" width="24" height="22" rx="4"/>
+  </g>
+
+  <!-- Number Row -->
+  <g fill="url(#kbCapDark)" stroke="#0f172a" stroke-width="1.5">
+    <rect x="95" y="163" width="24" height="25" rx="4"/>
+    <rect x="123" y="163" width="24" height="25" rx="4"/>
+    <rect x="151" y="163" width="24" height="25" rx="4"/>
+    <rect x="179" y="163" width="24" height="25" rx="4"/>
+    <rect x="207" y="163" width="24" height="25" rx="4"/>
+    <rect x="235" y="163" width="24" height="25" rx="4"/>
+    <rect x="263" y="163" width="24" height="25" rx="4"/>
+    <rect x="291" y="163" width="24" height="25" rx="4"/>
+    <rect x="319" y="163" width="24" height="25" rx="4"/>
+    <rect x="347" y="163" width="24" height="25" rx="4"/>
+    <rect x="375" y="163" width="24" height="25" rx="4"/>
+    <rect x="403" y="163" width="24" height="25" rx="4"/>
+    <rect x="431" y="163" width="24" height="25" rx="4"/>
+    <rect x="459" y="163" width="44" height="25" rx="4" fill="url(#kbCapAccent)"/>
+  </g>
+
+  <!-- QWERTY Row -->
+  <g fill="url(#kbCapDark)" stroke="#0f172a" stroke-width="1.5">
+    <rect x="95" y="193" width="36" height="25" rx="4"/>
+    <rect x="135" y="193" width="24" height="25" rx="4"/>
+    <rect x="163" y="193" width="24" height="25" rx="4"/>
+    <rect x="191" y="193" width="24" height="25" rx="4"/>
+    <rect x="219" y="193" width="24" height="25" rx="4"/>
+    <rect x="247" y="193" width="24" height="25" rx="4"/>
+    <rect x="275" y="193" width="24" height="25" rx="4"/>
+    <rect x="303" y="193" width="24" height="25" rx="4"/>
+    <rect x="331" y="193" width="24" height="25" rx="4"/>
+    <rect x="359" y="193" width="24" height="25" rx="4"/>
+    <rect x="387" y="193" width="24" height="25" rx="4"/>
+    <rect x="415" y="193" width="24" height="25" rx="4"/>
+    <rect x="443" y="193" width="34" height="25" rx="4"/>
+    <rect x="481" y="193" width="24" height="25" rx="4" fill="url(#kbCapAccent)"/>
+  </g>
+
+  <!-- Home Row -->
+  <g fill="url(#kbCapDark)" stroke="#0f172a" stroke-width="1.5">
+    <rect x="95" y="223" width="44" height="25" rx="4"/>
+    <rect x="143" y="223" width="24" height="25" rx="4"/>
+    <rect x="171" y="223" width="24" height="25" rx="4"/>
+    <rect x="199" y="223" width="24" height="25" rx="4"/>
+    <rect x="227" y="223" width="24" height="25" rx="4"/>
+    <rect x="255" y="223" width="24" height="25" rx="4"/>
+    <rect x="283" y="223" width="24" height="25" rx="4"/>
+    <rect x="311" y="223" width="24" height="25" rx="4"/>
+    <rect x="339" y="223" width="24" height="25" rx="4"/>
+    <rect x="367" y="223" width="24" height="25" rx="4"/>
+    <rect x="395" y="223" width="24" height="25" rx="4"/>
+    <rect x="423" y="223" width="52" height="25" rx="4" fill="url(#kbCapAccent)"/>
+    <rect x="481" y="223" width="24" height="25" rx="4"/>
+  </g>
+
+  <!-- Bottom Row & Spacebar -->
+  <g fill="url(#kbCapDark)" stroke="#0f172a" stroke-width="1.5">
+    <rect x="95" y="253" width="54" height="25" rx="4"/>
+    <rect x="153" y="253" width="24" height="25" rx="4"/>
+    <rect x="181" y="253" width="24" height="25" rx="4"/>
+    <rect x="209" y="253" width="24" height="25" rx="4"/>
+    <rect x="237" y="253" width="24" height="25" rx="4"/>
+    <rect x="265" y="253" width="24" height="25" rx="4"/>
+    <rect x="293" y="253" width="24" height="25" rx="4"/>
+    <rect x="321" y="253" width="24" height="25" rx="4"/>
+    <rect x="349" y="253" width="24" height="25" rx="4"/>
+    <rect x="377" y="253" width="24" height="25" rx="4"/>
+    <rect x="405" y="253" width="40" height="25" rx="4"/>
+    <rect x="451" y="253" width="24" height="25" rx="4" fill="url(#kbCapAccent)"/>
+    <rect x="481" y="253" width="24" height="25" rx="4"/>
+  </g>
+
+  <!-- Bottom Modifiers + Spacebar -->
+  <g fill="url(#kbCapDark)" stroke="#0f172a" stroke-width="1.5">
+    <rect x="95" y="283" width="34" height="26" rx="4"/>
+    <rect x="133" y="283" width="30" height="26" rx="4"/>
+    <rect x="167" y="283" width="34" height="26" rx="4"/>
+    <!-- Spacebar -->
+    <rect x="205" y="283" width="165" height="26" rx="4" fill="url(#kbCapAccent)"/>
+    <rect x="374" y="283" width="32" height="26" rx="4"/>
+    <rect x="410" y="283" width="30" height="26" rx="4"/>
+    <!-- Arrow cluster -->
+    <rect x="444" y="283" width="24" height="26" rx="4"/>
+    <rect x="472" y="283" width="24" height="26" rx="4"/>
+  </g>
+
+  <!-- Spec Tag -->
+  <rect x="230" y="390" width="140" height="26" rx="13" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="300" y="407" text-anchor="middle" fill="#c084fc" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" letter-spacing="1">GASKET MOUNT 75%</text>
+</svg>

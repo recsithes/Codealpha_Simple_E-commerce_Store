@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="clnBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#101522"/>
+      <stop offset="100%" stop-color="#080b12"/>
+    </linearGradient>
+    <linearGradient id="clnBlower" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="50%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#clnBg)"/>
+
+  <!-- Air Blower Bulb (Left) -->
+  <g transform="translate(40, 0)">
+    <!-- Bulb body -->
+    <circle cx="200" cy="270" r="60" fill="url(#clnBlower)" stroke="#475569" stroke-width="2.5"/>
+    <ellipse cx="200" cy="270" rx="35" ry="48" fill="#0f172a" stroke="#1e293b" stroke-width="2"/>
+    <!-- Nozzle neck -->
+    <path d="M190 215 L210 215 L206 140 L194 140 Z" fill="#64748b" stroke="#334155" stroke-width="2"/>
+    <!-- Precision Silicone Tip -->
+    <polygon points="193,140 207,140 204,115 196,115" fill="#38bdf8"/>
+    <!-- Air stream lines -->
+    <path d="M200 105 L200 70" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 4"/>
+    <path d="M190 100 L180 75" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3 3"/>
+    <path d="M210 100 L220 75" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3 3"/>
+  </g>
+
+  <!-- Carbon Lens Pen (Right) -->
+  <g transform="translate(130, 0)">
+    <rect x="250" y="110" width="22" height="200" rx="4" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+    <rect x="254" y="125" width="14" height="40" rx="2" fill="#38bdf8"/>
+    <!-- Retractable brush bristles top -->
+    <path d="M250 110 L272 110 L268 70 L254 70 Z" fill="#475569"/>
+    <!-- Microfiber cleaning swab bottom -->
+    <circle cx="261" cy="320" r="10" fill="#0f172a" stroke="#475569" stroke-width="1.5"/>
+  </g>
+
+  <!-- Spec Tag -->
+  <rect x="210" y="385" width="180" height="26" rx="13" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="300" y="402" text-anchor="middle" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" letter-spacing="1">OPTICAL GRADE AIR PURGE</text>
+</svg>

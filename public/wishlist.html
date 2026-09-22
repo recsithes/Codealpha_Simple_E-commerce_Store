@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Wishlist // AERO Hardware</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Global Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="nav-inner">
+                <a href="/" class="brand-logo">
+                    <div class="brand-logo-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                    </div>
+                    <span>AERO</span>
+                    <span class="brand-logo-badge">LOCAL</span>
+                </a>
+
+                <div class="nav-search">
+                    <span class="search-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </span>
+                    <input type="text" id="site-search-input" placeholder="Search acoustic, mechanical, titanium EDC..." autocomplete="off">
+                    <span class="search-kbd">/</span>
+                </div>
+
+                <div class="nav-actions" id="nav-auth-links"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container" style="padding-top:2.5rem; padding-bottom:5rem;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2rem; flex-wrap:wrap; gap:1rem;">
+            <div>
+                <h1 style="font-size:2.25rem; font-weight:800; letter-spacing:-0.03em; margin-bottom:0.4rem;">Your Saved Hardware</h1>
+                <p style="color:var(--text-secondary);" id="wishlist-subtitle">High-precision items saved for your dream workspace setup.</p>
+            </div>
+            <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+                <button class="btn btn-primary btn-sm" id="btn-move-all" onclick="moveAllWishlistToBag()">Move All to Bag</button>
+                <a href="/" class="btn btn-secondary btn-sm">Explore More Hardware</a>
+            </div>
+        </div>
+
+        <div id="wishlist-grid" class="product-grid">
+            <p style="color:var(--text-muted); grid-column:1/-1; text-align:center; padding:3rem 0;">Loading your saved items...</p>
+        </div>
+    </main>
+
+    <!-- Cart Drawer Overlay & Container (reused from app.js) -->
+    <div class="drawer-overlay" id="cart-drawer-overlay" onclick="closeCartDrawer()"></div>
+    <aside class="drawer-container" id="cart-drawer" aria-label="Shopping bag">
+        <div class="drawer-header">
+            <h3 class="drawer-title">Shopping Bag</h3>
+            <button class="drawer-close" onclick="closeCartDrawer()">✕</button>
+        </div>
+        <div class="drawer-body" id="drawer-cart-list"></div>
+        <div class="drawer-footer" id="drawer-cart-footer">
+            <div id="drawer-summary-container"></div>
+            <a href="/cart.html" class="btn btn-primary btn-block" style="margin-top:1rem;">Proceed to Checkout</a>
+        </div>
+    </aside>
+
+    <!-- Minimal Modern Footer -->
+    <footer style="border-top:1px solid var(--border-subtle); padding:3rem 0; background:var(--bg-surface); margin-top:4rem;">
+        <div class="container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem;">
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+                <div class="brand-logo-icon" style="width:28px; height:28px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon></svg>
+                </div>
+                <span style="font-weight:700;">AERO HARDWARE</span>
+                <span style="color:var(--text-muted); font-size:0.85rem;">// 100% Local Performance</span>
+            </div>
+            <div style="display:flex; gap:1.5rem; font-size:0.85rem; color:var(--text-secondary);">
+                <a href="/" style="color:inherit; text-decoration:none;">Shop</a>
+                <a href="/compare.html" style="color:inherit; text-decoration:none;">Compare</a>
+                <a href="/contact.html" style="color:inherit; text-decoration:none;">Support & Track</a>
+                <a href="/about.html" style="color:inherit; text-decoration:none;">About</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+    <script>
+        let wishlistItemsCache = [];
+
+        async function loadWishlistPage() {
+            const token = getAuthToken();
+            const grid = document.getElementById('wishlist-grid');
+            const moveAllBtn = document.getElementById('btn-move-all');
+
+            if (!token) {
+                if (moveAllBtn) moveAllBtn.style.display = 'none';
+                grid.innerHTML = `
+                    <div style="grid-column:1/-1; text-align:center; padding:4rem 1rem; background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--radius-md);">
+                        <div style="font-size:2.5rem; margin-bottom:1rem;">🔐</div>
+                        <h3 style="font-size:1.35rem; margin-bottom:0.5rem;">Authentication Required</h3>
+                        <p style="color:var(--text-secondary); margin-bottom:1.5rem;">Log in to view and synchronize your saved wishlist across devices.</p>
+                        <a href="/login.html" class="btn btn-primary">Sign In to Account</a>
+                    </div>
+                `;
+                return;
+            }
+
+            try {
+                const res = await fetch('/api/wishlist', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!res.ok) throw new Error('Could not fetch wishlist');
+                const items = await res.json();
+                wishlistItemsCache = items;
+
+                const subtitle = document.getElementById('wishlist-subtitle');
+                if (subtitle) {
+                    subtitle.textContent = `You have ${items.length} ${items.length === 1 ? 'item' : 'items'} saved in your private collection.`;
+                }
+
+                if (items.length === 0) {
+                    if (moveAllBtn) moveAllBtn.style.display = 'none';
+                    grid.innerHTML = `
+                        <div style="grid-column:1/-1; text-align:center; padding:4.5rem 1rem; background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--radius-md);">
+                            <div style="font-size:3rem; margin-bottom:1rem; opacity:0.6;">🤍</div>
+                            <h2 style="font-size:1.4rem; font-weight:700; margin-bottom:0.5rem;">Your wishlist is completely empty</h2>
+                            <p style="color:var(--text-secondary); margin-bottom:1.5rem;">Explore our precision acoustics, custom mechanical keyboards, and titanium EDC.</p>
+                            <a href="/" class="btn btn-primary">Browse Full Catalog</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                if (moveAllBtn) moveAllBtn.style.display = 'inline-flex';
+
+                grid.innerHTML = items.map(p => {
+                    const discountBadge = p.original_price && p.original_price > p.price
+                        ? `<span class="card-badge sale">-${Math.round((1 - p.price / p.original_price) * 100)}%</span>`
+                        : (p.badge ? `<span class="card-badge">${p.badge}</span>` : '');
+
+                    return `
+                        <div class="product-card" id="wishlist-item-${p.id}">
+                            <div class="card-img-wrap">
+                                ${discountBadge}
+                                <button class="wishlist-toggle-btn active" onclick="removeFromWishlistPage(${p.id})" title="Remove from Wishlist">
+                                    ✕
+                                </button>
+                                <a href="/product.html?id=${p.id}">
+                                    <img src="${p.image_url}" alt="${p.name}" class="card-img" onerror="this.onerror=null;this.src='/images/placeholder.svg'">
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-category">${p.category}</div>
+                                <a href="/product.html?id=${p.id}" style="text-decoration:none; color:inherit;">
+                                    <h3 class="card-title">${p.name}</h3>
+                                </a>
+                                <p class="card-tagline">${p.tagline || p.description}</p>
+                                <div class="card-rating">
+                                    <span class="star-icon">★</span>
+                                    <span style="font-weight:700; color:var(--text-primary); font-family:var(--font-mono);">${p.rating ? p.rating.toFixed(1) : '4.8'}</span>
+                                    <span>(${p.review_count || 12} reviews)</span>
+                                    <span style="margin-left:auto; color:${p.stock <= 5 ? 'var(--accent-rose)' : 'var(--accent-emerald)'}; font-size:0.75rem; font-weight:600;">
+                                        ${p.stock <= 5 ? `Only ${p.stock} left` : 'In Stock'}
+                                    </span>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="price-wrap">
+                                        <span class="current-price">$${p.price.toFixed(2)}</span>
+                                        ${p.original_price ? `<span class="original-price">$${p.original_price.toFixed(2)}</span>` : ''}
+                                    </div>
+                                    <div style="display:flex; gap:0.4rem;">
+                                        <button class="btn btn-secondary btn-sm" onclick="toggleCompare(${p.id})" title="Compare Specs">Compare</button>
+                                        <button class="btn btn-primary btn-sm" onclick="addToCart(${p.id})">Add to Bag</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (e) {
+                console.error('Error loading wishlist page:', e);
+                grid.innerHTML = '<p style="color:var(--accent-rose); grid-column:1/-1; text-align:center;">Failed to load wishlist items.</p>';
+            }
+        }
+
+        async function removeFromWishlistPage(productId) {
+            await toggleWishlist(productId);
+            loadWishlistPage();
+        }
+
+        async function moveAllWishlistToBag() {
+            if (wishlistItemsCache.length === 0) return;
+            const token = getAuthToken();
+            if (!token) return;
+
+            let addedCount = 0;
+            for (const item of wishlistItemsCache) {
+                try {
+                    await fetch('/api/cart', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ productId: item.id, quantity: 1 })
+                    });
+                    addedCount++;
+                } catch (e) {}
+            }
+
+            try {
+                await fetch('/api/wishlist', {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+            } catch (e) {}
+
+            showToast(`Moved ${addedCount} items to your shopping bag!`);
+            updateCartCount();
+            syncWishlist();
+            loadWishlistPage();
+            openCartDrawer();
+        }
+
+        document.addEventListener('DOMContentLoaded', loadWishlistPage);
+    </script>
+</body>
+</html>

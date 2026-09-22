@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="cblBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10141f"/>
+      <stop offset="100%" stop-color="#080b10"/>
+    </linearGradient>
+    <linearGradient id="cblCord" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="50%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="cblAviator" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="50%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#cblBg)"/>
+
+  <!-- Tight Coiled Cable section (horizontal coils) -->
+  <g stroke="url(#cblCord)" stroke-width="12" fill="none" stroke-linecap="round">
+    <!-- 8 spring coil loops -->
+    <path d="M140 180 C130 140 160 140 160 200 C160 260 130 260 140 200"/>
+    <path d="M165 180 C155 140 185 140 185 200 C185 260 155 260 165 200"/>
+    <path d="M190 180 C180 140 210 140 210 200 C210 260 180 260 190 200"/>
+    <path d="M215 180 C205 140 235 140 235 200 C235 260 205 260 215 200"/>
+    <path d="M240 180 C230 140 260 140 260 200 C260 260 230 260 240 200"/>
+    <path d="M265 180 C255 140 285 140 285 200 C285 260 255 260 265 200"/>
+    <path d="M290 180 C280 140 310 140 310 200 C310 260 280 260 290 200"/>
+    <path d="M315 180 C305 140 335 140 335 200 C335 260 305 260 315 200"/>
+  </g>
+
+  <!-- Left Cable Exit towards keyboard -->
+  <path d="M140 200 L70 200" stroke="url(#cblCord)" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <!-- CNC USB-C Heatshrink housing -->
+  <rect x="50" y="191" width="30" height="18" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+  <rect x="36" y="195" width="14" height="10" rx="2" fill="#94a3b8"/>
+
+  <!-- Right Cable towards Aviator Connector -->
+  <path d="M335 200 L380 200" stroke="url(#cblCord)" stroke-width="12" fill="none" stroke-linecap="round"/>
+
+  <!-- GX16 5-Pin Aviator Metallic Connector -->
+  <rect x="380" y="185" width="22" height="30" rx="3" fill="url(#cblAviator)" stroke="#334155" stroke-width="1.5"/>
+  <!-- Knurled Coupling Ring -->
+  <rect x="402" y="180" width="16" height="40" rx="2" fill="url(#cblAviator)" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="406" y1="182" x2="406" y2="218" stroke="#1e293b" stroke-width="1"/>
+  <line x1="410" y1="182" x2="410" y2="218" stroke="#1e293b" stroke-width="1"/>
+  <line x1="414" y1="182" x2="414" y2="218" stroke="#1e293b" stroke-width="1"/>
+  <rect x="418" y="185" width="22" height="30" rx="3" fill="url(#cblAviator)" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Right Lead Cable to PC -->
+  <path d="M440 200 C480 200 500 240 520 280 L540 320" stroke="url(#cblCord)" stroke-width="12" fill="none" stroke-linecap="round"/>
+
+  <!-- Spec Tag -->
+  <rect x="220" y="380" width="160" height="26" rx="13" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="300" y="397" text-anchor="middle" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" letter-spacing="1">GX16 AVIATOR 5-PIN</text>
+</svg>

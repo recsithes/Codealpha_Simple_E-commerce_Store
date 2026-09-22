@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Profile // AERO Hardware</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Global Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="nav-inner">
+                <a href="/" class="brand-logo">
+                    <div class="brand-logo-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                    </div>
+                    <span>AERO</span>
+                    <span class="brand-logo-badge">LOCAL</span>
+                </a>
+
+                <div class="nav-search">
+                    <span class="search-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </span>
+                    <input type="text" id="site-search-input" placeholder="Search acoustic, mechanical, titanium EDC..." autocomplete="off">
+                    <span class="search-kbd">/</span>
+                </div>
+
+                <div class="nav-actions" id="nav-auth-links"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container" style="padding-top:2.5rem; padding-bottom:5rem;">
+        <div id="profile-auth-check">
+            <p style="color:var(--text-muted);">Loading account details...</p>
+        </div>
+
+        <div id="profile-content-wrap" style="display:none;">
+            <div style="margin-bottom:2rem;">
+                <h1 style="font-size:2.25rem; font-weight:800; letter-spacing:-0.03em; margin-bottom:0.4rem;">My Account & Settings</h1>
+                <p style="color:var(--text-secondary);">Manage your personal details, default shipping address, and security preferences.</p>
+            </div>
+
+            <div class="profile-grid">
+                <!-- Sidebar Summary -->
+                <div>
+                    <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:2rem 1.5rem; text-align:center; box-shadow:var(--shadow-card); margin-bottom:1.5rem;">
+                        <div class="user-avatar" id="prof-avatar" style="width:72px; height:72px; font-size:2rem; margin:0 auto 1rem; border-radius:var(--radius-md); box-shadow:var(--shadow-elevated);">U</div>
+                        <h2 style="font-size:1.35rem; font-weight:700; margin-bottom:0.25rem;" id="prof-name">Loading...</h2>
+                        <div style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:0.75rem;" id="prof-username">@username</div>
+                        <span class="status-badge confirmed" id="prof-role" style="margin-bottom:1.5rem;">Customer</span>
+
+                        <div style="border-top:1px solid var(--border-subtle); padding-top:1.25rem; text-align:left; font-size:0.85rem; color:var(--text-secondary); display:flex; flex-direction:column; gap:0.75rem;">
+                            <div style="display:flex; justify-content:space-between;">
+                                <span>Total Orders:</span>
+                                <strong style="color:var(--text-primary);" id="stat-orders">0</strong>
+                            </div>
+                            <div style="display:flex; justify-content:space-between;">
+                                <span>Total Spent:</span>
+                                <strong style="color:var(--accent); font-family:var(--font-mono);" id="stat-spent">$0.00</strong>
+                            </div>
+                            <div style="display:flex; justify-content:space-between;">
+                                <span>Wishlist Items:</span>
+                                <strong style="color:var(--accent-rose);" id="stat-wishlist">0</strong>
+                            </div>
+                            <div style="display:flex; justify-content:space-between;">
+                                <span>Member Since:</span>
+                                <strong style="color:var(--text-primary);" id="prof-created">2026</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Navigation Links -->
+                    <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:1rem; display:flex; flex-direction:column; gap:0.5rem;">
+                        <a href="/orders.html" class="btn btn-secondary btn-block" style="justify-content:flex-start; text-align:left;">📦 View Order History</a>
+                        <a href="/wishlist.html" class="btn btn-secondary btn-block" style="justify-content:flex-start; text-align:left;">🤍 View Wishlist</a>
+                        <a href="/compare.html" class="btn btn-secondary btn-block" style="justify-content:flex-start; text-align:left;">⚖️ Product Comparison</a>
+                        <a href="/contact.html" class="btn btn-secondary btn-block" style="justify-content:flex-start; text-align:left;">🎧 Support & Tracking</a>
+                        <button onclick="logout()" class="btn btn-secondary btn-block" style="justify-content:flex-start; text-align:left; color:var(--accent-rose);">🚪 Sign Out</button>
+                    </div>
+                </div>
+
+                <!-- Main Settings Column -->
+                <div style="display:flex; flex-direction:column; gap:2rem;">
+                    <!-- Personal Profile Form -->
+                    <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:2rem; box-shadow:var(--shadow-card);">
+                        <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:0.25rem;">Personal Information</h3>
+                        <p style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:1.5rem;">Used for automatic checkout and fulfillment receipts.</p>
+
+                        <form id="form-profile-update" onsubmit="handleUpdateProfile(event)">
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-fullname">Full Name</label>
+                                    <input type="text" id="edit-fullname" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-email">Email Address</label>
+                                    <input type="email" id="edit-email" class="form-input" required>
+                                </div>
+                            </div>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-phone">Phone Number</label>
+                                    <input type="tel" id="edit-phone" class="form-input" placeholder="+1 (512) 555-0199">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-username-readonly">Username</label>
+                                    <input type="text" id="edit-username-readonly" class="form-input" disabled style="opacity:0.6; cursor:not-allowed;">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="edit-address">Default Shipping Address</label>
+                                <textarea id="edit-address" class="form-textarea" rows="2" placeholder="Street, Suite, City, State, Zip Code"></textarea>
+                            </div>
+                            <div style="display:flex; justify-content:flex-end;">
+                                <button type="submit" class="btn btn-primary" id="btn-save-profile">Save Profile Changes</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Security & Password Form -->
+                    <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:2rem; box-shadow:var(--shadow-card);">
+                        <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:0.25rem;">Security & Password</h3>
+                        <p style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:1.5rem;">Ensure your account is protected with a strong credentials.</p>
+
+                        <form id="form-password-update" onsubmit="handleChangePassword(event)">
+                            <div class="form-group">
+                                <label class="form-label" for="edit-curr-pass">Current Password</label>
+                                <input type="password" id="edit-curr-pass" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+                            </div>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-new-pass">New Password</label>
+                                    <input type="password" id="edit-new-pass" class="form-input" placeholder="At least 6 characters" required autocomplete="new-password">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-confirm-pass">Confirm New Password</label>
+                                    <input type="password" id="edit-confirm-pass" class="form-input" placeholder="Re-enter new password" required autocomplete="new-password">
+                                </div>
+                            </div>
+                            <div style="display:flex; justify-content:flex-end;">
+                                <button type="submit" class="btn btn-secondary" id="btn-change-pass">Update Password</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- App Scripts -->
+    <script src="/js/app.js"></script>
+    <script>
+        async function loadProfile() {
+            const token = getAuthToken();
+            const checkEl = document.getElementById('profile-auth-check');
+            const wrapEl = document.getElementById('profile-content-wrap');
+
+            if (!token) {
+                checkEl.innerHTML = `
+                    <div style="text-align:center; padding:4rem 1rem; background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--radius-md);">
+                        <div style="font-size:2.5rem; margin-bottom:1rem;">🔐</div>
+                        <h3 style="font-size:1.35rem; margin-bottom:0.5rem;">Authentication Required</h3>
+                        <p style="color:var(--text-secondary); margin-bottom:1.5rem;">Please log in to manage your profile and account settings.</p>
+                        <a href="/login.html" class="btn btn-primary">Sign In to Account</a>
+                    </div>
+                `;
+                return;
+            }
+
+            try {
+                const res = await fetch('/api/auth/profile', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!res.ok) throw new Error('Could not load profile');
+                const data = await res.json();
+
+                checkEl.style.display = 'none';
+                wrapEl.style.display = 'block';
+
+                document.getElementById('prof-avatar').textContent = (data.full_name || data.username).charAt(0).toUpperCase();
+                document.getElementById('prof-name').textContent = data.full_name || data.username;
+                document.getElementById('prof-username').textContent = `@${data.username}`;
+                document.getElementById('prof-role').textContent = data.role === 'admin' ? 'Store Administrator' : 'Verified Customer';
+                document.getElementById('prof-role').className = `status-badge ${data.role === 'admin' ? 'shipped' : 'confirmed'}`;
+                
+                document.getElementById('stat-orders').textContent = data.stats.orders;
+                document.getElementById('stat-spent').textContent = `$${data.stats.spent.toFixed(2)}`;
+                document.getElementById('stat-wishlist').textContent = data.stats.wishlist;
+                document.getElementById('prof-created').textContent = data.created_at ? new Date(data.created_at).toLocaleDateString() : '2026';
+
+                // Form fields
+                document.getElementById('edit-fullname').value = data.full_name || '';
+                document.getElementById('edit-email').value = data.email || '';
+                document.getElementById('edit-phone').value = data.phone || '';
+                document.getElementById('edit-username-readonly').value = data.username;
+                document.getElementById('edit-address').value = data.address || '';
+            } catch (e) {
+                checkEl.innerHTML = '<p style="color:var(--accent-rose); text-align:center;">Failed to load user profile.</p>';
+            }
+        }
+
+        async function handleUpdateProfile(e) {
+            e.preventDefault();
+            const token = getAuthToken();
+            if (!token) return;
+
+            const full_name = document.getElementById('edit-fullname').value.trim();
+            const email = document.getElementById('edit-email').value.trim();
+            const phone = document.getElementById('edit-phone').value.trim();
+            const address = document.getElementById('edit-address').value.trim();
+            const btn = document.getElementById('btn-save-profile');
+
+            btn.disabled = true;
+            btn.textContent = 'Saving Changes...';
+
+            try {
+                const res = await fetch('/api/auth/profile', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ full_name, email, phone, address })
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    showToast('Profile updated successfully!');
+                    // Update stored user
+                    const curUser = getUser() || {};
+                    curUser.full_name = full_name;
+                    curUser.email = email;
+                    localStorage.setItem('user', JSON.stringify(curUser));
+                    loadProfile();
+                } else {
+                    showToast(data.error || 'Failed to update profile', 'error');
+                }
+            } catch (err) {
+                showToast('Error connecting to server', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Save Profile Changes';
+            }
+        }
+
+        async function handleChangePassword(e) {
+            e.preventDefault();
+            const token = getAuthToken();
+            if (!token) return;
+
+            const current_password = document.getElementById('edit-curr-pass').value;
+            const new_password = document.getElementById('edit-new-pass').value;
+            const confirm_password = document.getElementById('edit-confirm-pass').value;
+
+            if (new_password !== confirm_password) {
+                showToast('New passwords do not match', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('btn-change-pass');
+            btn.disabled = true;
+            btn.textContent = 'Updating...';
+
+            try {
+                const res = await fetch('/api/auth/password', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ current_password, new_password })
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    showToast('Password updated successfully!');
+                    document.getElementById('form-password-update').reset();
+                } else {
+                    showToast(data.error || 'Failed to update password', 'error');
+                }
+            } catch (err) {
+                showToast('Error connecting to server', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Update Password';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadProfile);
+    </script>
+</body>
+</html>

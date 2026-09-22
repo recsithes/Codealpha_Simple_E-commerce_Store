@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="gmBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111624"/>
+      <stop offset="100%" stop-color="#090c13"/>
+    </linearGradient>
+    <linearGradient id="gmMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="50%" stop-color="#64748b"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="gmGrip" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#gmBg)"/>
+  <circle cx="300" cy="220" r="130" fill="#f59e0b" opacity="0.06"/>
+
+  <!-- Gimbal Tripod Base Legs (Folded/Open) -->
+  <polygon points="300,370 240,410 255,410 300,380" fill="url(#gmMetal)"/>
+  <polygon points="300,370 360,410 345,410 300,380" fill="url(#gmMetal)"/>
+  <rect x="294" y="370" width="12" height="40" fill="url(#gmMetal)"/>
+
+  <!-- Gimbal Ergonomic Handle Body -->
+  <rect x="282" y="230" width="36" height="145" rx="8" fill="url(#gmGrip)" stroke="#334155" stroke-width="2"/>
+  
+  <!-- Texture ribs on handle -->
+  <line x1="286" y1="280" x2="314" y2="280" stroke="#334155" stroke-width="1.5"/>
+  <line x1="286" y1="295" x2="314" y2="295" stroke="#334155" stroke-width="1.5"/>
+  <line x1="286" y1="310" x2="314" y2="310" stroke="#334155" stroke-width="1.5"/>
+  <line x1="286" y1="325" x2="314" y2="325" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Control Joystick & Status Panel -->
+  <circle cx="300" cy="255" r="10" fill="#0f172a" stroke="#64748b" stroke-width="1.5"/>
+  <circle cx="300" cy="255" r="5" fill="#f59e0b"/>
+  <!-- Mode Button -->
+  <rect x="290" y="270" width="8" height="5" rx="1.5" fill="#e2e8f0"/>
+  <!-- Rec Button with Red Dot -->
+  <circle cx="307" cy="272" r="3.5" fill="#ef4444"/>
+
+  <!-- Pan Motor Axis Joint -->
+  <rect x="286" y="205" width="28" height="25" rx="6" fill="url(#gmMetal)" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="300" cy="217" r="4" fill="#38bdf8"/>
+
+  <!-- Roll Arm Curved Beam -->
+  <path d="M300 205 L300 170 C300 150 360 150 360 130" fill="none" stroke="url(#gmMetal)" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- Tilt Motor Axis Joint -->
+  <circle cx="360" cy="130" r="14" fill="url(#gmMetal)" stroke="#475569" stroke-width="2"/>
+  <circle cx="360" cy="130" r="6" fill="#f59e0b"/>
+
+  <!-- Tilt Arm To Phone Clamp -->
+  <path d="M360 130 L320 130" fill="none" stroke="url(#gmMetal)" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Magnetic Phone Clamp Holder -->
+  <rect x="260" y="112" width="60" height="36" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+
+  <!-- Mounted Smartphone (Horizontal Flagship) -->
+  <rect x="180" y="70" width="200" height="120" rx="12" fill="#0f172a" stroke="#475569" stroke-width="3"/>
+  <rect x="186" y="76" width="188" height="108" rx="8" fill="#1e1b4b"/>
+  <!-- Live camera grid lines -->
+  <line x1="248" y1="76" x2="248" y2="184" stroke="#475569" stroke-width="0.5" stroke-dasharray="4 4"/>
+  <line x1="312" y1="76" x2="312" y2="184" stroke="#475569" stroke-width="0.5" stroke-dasharray="4 4"/>
+  <line x1="186" y1="112" x2="374" y2="112" stroke="#475569" stroke-width="0.5" stroke-dasharray="4 4"/>
+  <line x1="186" y1="148" x2="374" y2="148" stroke="#475569" stroke-width="0.5" stroke-dasharray="4 4"/>
+  <!-- Focus Box on Screen -->
+  <rect x="265" y="115" width="30" height="30" fill="none" stroke="#22c55e" stroke-width="1.5"/>
+  <circle cx="280" cy="130" r="2" fill="#22c55e"/>
+
+  <!-- Spec Tag -->
+  <rect x="225" y="415" width="150" height="24" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="300" y="431" text-anchor="middle" fill="#fbbf24" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" letter-spacing="1">3-AXIS AI TRACKING</text>
+</svg>

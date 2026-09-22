@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="ukBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#12151e"/>
+      <stop offset="100%" stop-color="#080a10"/>
+    </linearGradient>
+    <linearGradient id="ukTi" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#94a3b8"/>
+      <stop offset="40%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+    <linearGradient id="ukSteel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="50%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#64748b"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#ukBg)"/>
+
+  <!-- Angled EDC Utility Knife -->
+  <g transform="rotate(-15 300 225)">
+    <!-- Shadow -->
+    <polygon points="120,255 480,255 460,285 140,285" fill="#000" opacity="0.35" filter="blur(8px)"/>
+
+    <!-- Grade-5 Titanium Skeletonized Chassis -->
+    <rect x="180" y="200" width="280" height="45" rx="10" fill="url(#ukTi)" stroke="#334155" stroke-width="2"/>
+
+    <!-- Skeleton Weight-Reduction Chamfers -->
+    <circle cx="230" cy="222" r="9" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+    <circle cx="265" cy="222" r="9" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+    <circle cx="300" cy="222" r="9" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+
+    <!-- Lanyard Hole / Keyring Loop -->
+    <circle cx="435" cy="222" r="6" fill="#0f172a" stroke="#64748b" stroke-width="2"/>
+
+    <!-- Brass Sliding Lock Pin -->
+    <rect x="345" y="210" width="32" height="24" rx="4" fill="#f59e0b" stroke="#b45309" stroke-width="1.5"/>
+    <circle cx="361" cy="222" r="4" fill="#78350f"/>
+
+    <!-- Standard Trapezoid Utility Blade (Steel 60-HRC) extending from nose -->
+    <polygon points="180,208 110,214 135,236 180,236" fill="url(#ukSteel)" stroke="#94a3b8" stroke-width="1.5"/>
+    <!-- Blade Razor Edge Grind Line -->
+    <line x1="110" y1="214" x2="135" y2="236" stroke="#f8fafc" stroke-width="2"/>
+    <!-- Blade Lock Notch -->
+    <rect x="160" y="216" width="10" height="4" fill="#0f172a"/>
+  </g>
+
+  <!-- Spec Tag -->
+  <rect x="220" y="380" width="160" height="26" rx="13" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="300" y="397" text-anchor="middle" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" letter-spacing="1">QUICK-RELEASE BLADE</text>
+</svg>

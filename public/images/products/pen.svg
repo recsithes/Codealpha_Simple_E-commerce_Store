@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="penBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10141f"/>
+      <stop offset="100%" stop-color="#080a10"/>
+    </linearGradient>
+    <linearGradient id="penTi" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#94a3b8"/>
+      <stop offset="25%" stop-color="#f1f5f9"/>
+      <stop offset="50%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+    <linearGradient id="penClip" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#64748b"/>
+      <stop offset="50%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#penBg)"/>
+
+  <!-- Pen angled across diagonal -->
+  <g transform="rotate(-30 300 225)">
+    <!-- Shadow -->
+    <rect x="70" y="240" width="460" height="26" rx="13" fill="#000" opacity="0.3" filter="blur(8px)"/>
+
+    <!-- Main Titanium Barrel -->
+    <rect x="150" y="215" width="310" height="24" rx="3" fill="url(#penTi)" stroke="#334155" stroke-width="1"/>
+
+    <!-- Machined CNC Grip Rings -->
+    <line x1="165" y1="215" x2="165" y2="239" stroke="#334155" stroke-width="1.5"/>
+    <line x1="172" y1="215" x2="172" y2="239" stroke="#334155" stroke-width="1.5"/>
+    <line x1="179" y1="215" x2="179" y2="239" stroke="#334155" stroke-width="1.5"/>
+    <line x1="186" y1="215" x2="186" y2="239" stroke="#334155" stroke-width="1.5"/>
+    <line x1="193" y1="215" x2="193" y2="239" stroke="#334155" stroke-width="1.5"/>
+    <line x1="200" y1="215" x2="200" y2="239" stroke="#334155" stroke-width="1.5"/>
+
+    <!-- Bolt-Action L-Track Slot & Bolt Pin -->
+    <!-- Slot cutout in barrel -->
+    <path d="M380 220 L420 220 L420 228 L410 228 L410 223 L380 223 Z" fill="#1e293b"/>
+    <!-- Bolt pin knob -->
+    <circle cx="415" cy="224" r="5" fill="#f59e0b" stroke="#d97706" stroke-width="1.5"/>
+
+    <!-- Machined Pocket Clip -->
+    <rect x="360" y="206" width="85" height="7" rx="3" fill="url(#penClip)" stroke="#475569" stroke-width="1"/>
+    <circle cx="435" cy="209" r="3" fill="#1e293b"/>
+
+    <!-- Tapered Nose Cone -->
+    <polygon points="150,215 115,223 115,231 150,239" fill="url(#penTi)" stroke="#334155" stroke-width="1"/>
+
+    <!-- Schmidt Ceramic Ballpoint Tip -->
+    <polygon points="115,225 102,226 102,228 115,229" fill="#0f172a"/>
+    <circle cx="102" cy="227" r="1.5" fill="#38bdf8"/>
+
+    <!-- Flat Top Crown Cap -->
+    <rect x="460" y="217" width="14" height="20" rx="2" fill="url(#penTi)" stroke="#334155" stroke-width="1"/>
+  </g>
+
+  <!-- Spec Tag -->
+  <rect x="225" y="390" width="150" height="26" rx="13" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="300" y="407" text-anchor="middle" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" letter-spacing="1">BOLT-ACTION Ti-6Al-4V</text>
+</svg>

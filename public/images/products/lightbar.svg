@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="lbBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111624"/>
+      <stop offset="100%" stop-color="#080c14"/>
+    </linearGradient>
+    <linearGradient id="lbAlu" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#475569"/>
+      <stop offset="50%" stop-color="#94a3b8"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+    <linearGradient id="lbGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="60%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#lbBg)"/>
+
+  <!-- Asymmetric Downward Light Beam Projection onto Desk -->
+  <polygon points="120,165 480,165 540,370 60,370" fill="url(#lbGlow)" opacity="0.25"/>
+
+  <!-- Horizontal Anodized Aluminum Light Bar Housing -->
+  <rect x="100" y="145" width="400" height="24" rx="6" fill="url(#lbAlu)" stroke="#1e293b" stroke-width="2"/>
+  
+  <!-- LED Diffuser Strip (Warm/Cool Balance) -->
+  <rect x="110" y="160" width="380" height="6" rx="2" fill="#fef08a"/>
+
+  <!-- Center Counterweighted Gravity Pivot Mount (Clamps to top of monitor) -->
+  <g transform="translate(300, 145)">
+    <!-- Front lip resting on monitor bezel -->
+    <rect x="-18" y="0" width="36" height="30" rx="4" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <!-- Pivot hinge -->
+    <circle cx="0" cy="18" r="6" fill="#64748b"/>
+    <!-- Rear counterweight ball/cylinder -->
+    <path d="M-10 18 L-10 65 L10 65 L10 18 Z" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <ellipse cx="0" cy="65" rx="20" ry="12" fill="#334155"/>
+  </g>
+
+  <!-- Wireless Desktop Rotary Controller Puck (Right Foreground) -->
+  <g transform="translate(420, 310)">
+    <!-- Shadow -->
+    <ellipse cx="0" cy="30" rx="45" ry="15" fill="#000" opacity="0.4"/>
+    <!-- Puck Body -->
+    <ellipse cx="0" cy="20" rx="38" ry="18" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+    <ellipse cx="0" cy="8" rx="38" ry="18" fill="url(#lbAlu)" stroke="#64748b" stroke-width="1.5"/>
+    <!-- Rotary Dial Indicator -->
+    <line x1="0" y1="2" x2="0" y2="10" stroke="#f59e0b" stroke-width="2.5"/>
+  </g>
+
+  <!-- Spec Tag -->
+  <rect x="210" y="390" width="180" height="26" rx="13" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="300" y="407" text-anchor="middle" fill="#fbbf24" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" letter-spacing="1">ASYMMETRIC ZERO-GLARE</text>
+</svg>

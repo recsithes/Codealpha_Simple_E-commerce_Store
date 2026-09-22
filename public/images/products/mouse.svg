@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="msBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#101522"/>
+      <stop offset="100%" stop-color="#080b12"/>
+    </linearGradient>
+    <linearGradient id="msBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="50%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="msRgb" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="50%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="msWheel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#94a3b8"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#msBg)"/>
+  <!-- Underglow sensor light -->
+  <ellipse cx="300" cy="240" rx="90" ry="140" fill="url(#msRgb)" opacity="0.12" filter="blur(20px)"/>
+
+  <!-- Mouse Outer Contour (Ergonomic Right-Hand Shape) -->
+  <path d="M260 85 
+           C290 80, 310 80, 340 85 
+           C370 95, 385 130, 388 175 
+           C392 230, 395 280, 385 325 
+           C375 365, 335 385, 300 385 
+           C260 385, 225 365, 218 320 
+           C212 280, 210 230, 220 175 
+           C225 130, 235 95, 260 85 Z" 
+        fill="url(#msBody)" stroke="#475569" stroke-width="2.5"/>
+
+  <!-- Split Main Click Buttons (Left / Right) -->
+  <!-- Split seam center line -->
+  <line x1="300" y1="82" x2="300" y2="190" stroke="#0f172a" stroke-width="3"/>
+  <path d="M255 190 Q300 195 345 190" fill="none" stroke="#0f172a" stroke-width="3"/>
+
+  <!-- Precision Scroll Wheel Well & Wheel -->
+  <rect x="290" y="105" width="20" height="50" rx="6" fill="#090d16" stroke="#1e293b" stroke-width="1.5"/>
+  <rect x="293" y="112" width="14" height="36" rx="5" fill="url(#msWheel)" stroke="#38bdf8" stroke-width="1"/>
+  <!-- Wheel Ribs -->
+  <line x1="293" y1="120" x2="307" y2="120" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="293" y1="128" x2="307" y2="128" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="293" y1="136" x2="307" y2="136" stroke="#1e293b" stroke-width="1.5"/>
+
+  <!-- DPI Selector Button -->
+  <rect x="295" y="165" width="10" height="15" rx="3" fill="#334155" stroke="#64748b" stroke-width="1"/>
+
+  <!-- Ergonomic Thumb Flare & Side Buttons (Left Side) -->
+  <path d="M214 200 C200 225, 200 270, 218 295" fill="none" stroke="#0ea5e9" stroke-width="3" stroke-linecap="round"/>
+  <!-- Thumb Buttons M4/M5 -->
+  <rect x="208" y="215" width="6" height="26" rx="2" fill="#475569" stroke="#64748b" stroke-width="1"/>
+  <rect x="209" y="248" width="6" height="26" rx="2" fill="#475569" stroke="#64748b" stroke-width="1"/>
+
+  <!-- Subtle Honeycomb Structural Hex Grid on Palm Rest -->
+  <g stroke="#38bdf8" stroke-width="1" fill="none" opacity="0.35">
+    <!-- Hexagon 1 -->
+    <polygon points="300,270 308,275 308,285 300,290 292,285 292,275"/>
+    <!-- Hexagon 2 -->
+    <polygon points="284,279 292,284 292,294 284,299 276,294 276,284"/>
+    <!-- Hexagon 3 -->
+    <polygon points="316,279 324,284 324,294 316,299 308,294 308,284"/>
+    <!-- Hexagon 4 -->
+    <polygon points="300,298 308,303 308,313 300,318 292,313 292,303"/>
+    <!-- Hexagon 5 -->
+    <polygon points="284,307 292,312 292,322 284,327 276,322 276,312"/>
+    <!-- Hexagon 6 -->
+    <polygon points="316,307 324,312 324,322 316,327 308,322 308,312"/>
+  </g>
+
+  <!-- Palm RGB Breathing Logo Glow -->
+  <polygon points="300,340 306,348 300,356 294,348" fill="#38bdf8" opacity="0.9"/>
+
+  <!-- Spec Tag -->
+  <rect x="235" y="402" width="130" height="26" rx="13" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="300" y="419" text-anchor="middle" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" letter-spacing="1">58G ULTRALIGHT</text>
+</svg>
